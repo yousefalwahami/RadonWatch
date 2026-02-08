@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import UraniumDecayChain from "@/components/education/UraniumDecayChain";
 
@@ -78,106 +78,60 @@ const QUIZ_QUESTIONS: QuizQuestion[] = [
   },
 ];
 
+const SECTIONS = [
+  { id: "what-is-radon", label: "What is Radon?" },
+  { id: "science", label: "The Science Behind Radon" },
+  { id: "entry", label: "How Radon Enters Your Home" },
+  { id: "health", label: "Health Effects" },
+  { id: "testing", label: "Testing for Radon" },
+  { id: "mitigation", label: "Reducing Radon Levels" },
+  { id: "canada", label: "Radon in Canada" },
+  { id: "quiz", label: "Final Quiz" },
+];
+
 export default function LearnPage() {
-  const [activeSection, setActiveSection] = useState("what-is-radon");
+  const [currentPage, setCurrentPage] = useState(0);
   const [quizAnswers, setQuizAnswers] = useState<Record<number, number>>({});
-  const [showQuizResults, setShowQuizResults] = useState(false);
+
+  // Scroll to top when page changes
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }, [currentPage]);
 
   const handleQuizAnswer = (questionId: number, answerIndex: number) => {
     setQuizAnswers((prev) => ({ ...prev, [questionId]: answerIndex }));
-  };
-
-  const handleQuizSubmit = () => {
-    setShowQuizResults(true);
-    // Scroll to results
-    document
-      .getElementById("quiz-results")
-      ?.scrollIntoView({ behavior: "smooth" });
   };
 
   const quizScore = Object.entries(quizAnswers).filter(
     ([id, answer]) => QUIZ_QUESTIONS[parseInt(id) - 1].correctAnswer === answer,
   ).length;
 
-  const scrollToSection = (sectionId: string) => {
-    setActiveSection(sectionId);
-    const element = document.getElementById(sectionId);
-    if (element) {
-      const offset = 100;
-      const elementPosition = element.getBoundingClientRect().top;
-      const offsetPosition = elementPosition + window.pageYOffset - offset;
-      window.scrollTo({
-        top: offsetPosition,
-        behavior: "smooth",
-      });
+  const goToPage = (pageIndex: number) => {
+    setCurrentPage(pageIndex);
+  };
+
+  const nextPage = () => {
+    if (currentPage < SECTIONS.length - 1) {
+      setCurrentPage(currentPage + 1);
     }
   };
 
-  return (
-    <div className="min-h-screen bg-dark-bg">
-      {/* Top Navigation */}
-      <div className="border-b border-subtle bg-dark-card/50 backdrop-blur-sm sticky top-0 z-40">
-        <div className="container mx-auto px-4 py-4">
-          <Link
-            href="/"
-            className="text-accent-gold hover:text-text-primary font-semibold transition-colors inline-flex items-center gap-2"
-          >
-            <span>←</span> Back to Home
-          </Link>
-        </div>
-      </div>
+  const prevPage = () => {
+    if (currentPage > 0) {
+      setCurrentPage(currentPage - 1);
+    }
+  };
 
-      <div className="flex">
-        {/* Side Navigation */}
-        <aside className="hidden lg:block w-80 border-r border-subtle bg-dark-card/30 sticky top-[73px] h-[calc(100vh-73px)] overflow-y-auto">
-          <div className="p-6">
-            <h2 className="text-2xl font-bold text-text-primary mb-6 font-serif">
-              Learning Center
-            </h2>
-            <nav className="space-y-1">
-              {[
-                { id: "what-is-radon", label: "What is Radon?" },
-                { id: "science", label: "The Science Behind Radon" },
-                { id: "entry", label: "How Radon Enters Your Home" },
-                { id: "health", label: "Health Effects" },
-                { id: "testing", label: "Testing for Radon" },
-                { id: "mitigation", label: "Reducing Radon Levels" },
-                { id: "canada", label: "Radon in Canada" },
-                { id: "quiz", label: "Final Quiz" },
-              ].map((section) => (
-                <button
-                  key={section.id}
-                  onClick={() => scrollToSection(section.id)}
-                  className={`w-full text-left px-4 py-2 rounded-lg transition-all ${
-                    activeSection === section.id
-                      ? "bg-accent-gold text-dark-bg font-semibold"
-                      : "text-text-secondary hover:text-text-primary hover:bg-dark-card-hover"
-                  }`}
-                >
-                  {section.label}
-                </button>
-              ))}
-            </nav>
-          </div>
-        </aside>
-
-        {/* Main Content */}
-        <main className="flex-1 px-4 lg:px-12 py-12 max-w-5xl">
-          {/* Header */}
-          <div className="mb-12">
-            <h1 className="text-5xl font-bold text-text-primary mb-4 font-serif">
-              RadonVision Learning Center
-            </h1>
-            <p className="text-xl text-text-secondary">
-              Complete Guide to Understanding Radon
-            </p>
-          </div>
-
-          {/* What is Radon */}
-          <section id="what-is-radon" className="mb-16 scroll-mt-24">
-            <h2 className="text-4xl font-bold text-text-primary mb-6 font-serif border-b border-subtle pb-3">
-              What is Radon?
-            </h2>
+  const renderPageContent = () => {
+    switch (currentPage) {
+      case 0: // What is Radon
+        return (
+          <div className="space-y-8 animate-fadeIn">
+            <div>
+              <h2 className="text-4xl font-bold text-text-primary mb-6 font-serif border-b border-subtle pb-3">
+                What is Radon?
+              </h2>
+            </div>
 
             <div className="space-y-6 text-text-secondary">
               <div>
@@ -269,13 +223,17 @@ export default function LearnPage() {
                 </p>
               </div>
             </div>
-          </section>
+          </div>
+        );
 
-          {/* The Science Behind Radon */}
-          <section id="science" className="mb-16 scroll-mt-24">
-            <h2 className="text-4xl font-bold text-text-primary mb-6 font-serif border-b border-subtle pb-3">
-              The Science Behind Radon
-            </h2>
+      case 1: // The Science Behind Radon
+        return (
+          <div className="space-y-8 animate-fadeIn">
+            <div>
+              <h2 className="text-4xl font-bold text-text-primary mb-6 font-serif border-b border-subtle pb-3">
+                The Science Behind Radon
+              </h2>
+            </div>
 
             <div className="space-y-6 text-text-secondary">
               <div>
@@ -520,13 +478,17 @@ export default function LearnPage() {
                 </div>
               </div>
             </div>
-          </section>
+          </div>
+        );
 
-          {/* How Radon Enters Your Home */}
-          <section id="entry" className="mb-16 scroll-mt-24">
-            <h2 className="text-4xl font-bold text-text-primary mb-6 font-serif border-b border-subtle pb-3">
-              How Radon Enters Your Home
-            </h2>
+      case 2: // How Radon Enters Your Home
+        return (
+          <div className="space-y-8 animate-fadeIn">
+            <div>
+              <h2 className="text-4xl font-bold text-text-primary mb-6 font-serif border-b border-subtle pb-3">
+                How Radon Enters Your Home
+              </h2>
+            </div>
 
             <div className="space-y-6 text-text-secondary">
               <div>
@@ -696,13 +658,17 @@ export default function LearnPage() {
                 </div>
               </div>
             </div>
-          </section>
+          </div>
+        );
 
-          {/* Health Effects */}
-          <section id="health" className="mb-16 scroll-mt-24">
-            <h2 className="text-4xl font-bold text-text-primary mb-6 font-serif border-b border-subtle pb-3">
-              Health Effects of Radon
-            </h2>
+      case 3: // Health Effects
+        return (
+          <div className="space-y-8 animate-fadeIn">
+            <div>
+              <h2 className="text-4xl font-bold text-text-primary mb-6 font-serif border-b border-subtle pb-3">
+                Health Effects of Radon
+              </h2>
+            </div>
 
             <div className="space-y-6 text-text-secondary">
               <div>
@@ -848,37 +814,6 @@ export default function LearnPage() {
 
               <div>
                 <h3 className="text-2xl font-semibold text-text-primary mb-4 font-serif">
-                  Latency Period
-                </h3>
-                <p className="leading-relaxed mb-4">
-                  Radon-induced lung cancer has a long latency:
-                </p>
-                <ul className="list-disc pl-6 space-y-2 mb-4">
-                  <li>
-                    <strong className="text-text-primary">
-                      Typical latency:
-                    </strong>{" "}
-                    10-30 years after exposure begins
-                  </li>
-                  <li>
-                    <strong className="text-text-primary">First signs:</strong>{" "}
-                    Often indistinguishable from other lung cancers
-                  </li>
-                  <li>
-                    <strong className="text-text-primary">Symptoms:</strong>{" "}
-                    Persistent cough, chest pain, wheezing, coughing up blood
-                    (late-stage)
-                  </li>
-                </ul>
-                <p className="leading-relaxed italic">
-                  This long delay means children exposed to radon may not
-                  develop cancer until middle age, and the home you lived in
-                  decades ago might be relevant to current health.
-                </p>
-              </div>
-
-              <div>
-                <h3 className="text-2xl font-semibold text-text-primary mb-4 font-serif">
                   Vulnerable Populations
                 </h3>
                 <div className="grid md:grid-cols-2 gap-4">
@@ -924,13 +859,17 @@ export default function LearnPage() {
                 </div>
               </div>
             </div>
-          </section>
+          </div>
+        );
 
-          {/* Testing for Radon */}
-          <section id="testing" className="mb-16 scroll-mt-24">
-            <h2 className="text-4xl font-bold text-text-primary mb-6 font-serif border-b border-subtle pb-3">
-              Testing for Radon
-            </h2>
+      case 4: // Testing for Radon
+        return (
+          <div className="space-y-8 animate-fadeIn">
+            <div>
+              <h2 className="text-4xl font-bold text-text-primary mb-6 font-serif border-b border-subtle pb-3">
+                Testing for Radon
+              </h2>
+            </div>
 
             <div className="space-y-6 text-text-secondary">
               <div className="bg-accent-gold/10 border-l-4 border-accent-gold rounded-r-lg p-6 mb-6">
@@ -947,46 +886,6 @@ export default function LearnPage() {
                   <li>• Assume safety based on home age or construction</li>
                   <li>• Use regional maps as a definitive guide</li>
                 </ul>
-              </div>
-
-              <div>
-                <h3 className="text-2xl font-semibold text-text-primary mb-4 font-serif">
-                  When to Test
-                </h3>
-                <p className="leading-relaxed mb-4">
-                  <strong className="text-text-primary">Best time:</strong>{" "}
-                  During the heating season (October through April in Canada)
-                </p>
-                <ul className="list-disc pl-6 space-y-2 mb-6">
-                  <li>Windows and doors are closed</li>
-                  <li>Furnace creates stack effect</li>
-                  <li>
-                    Conditions reflect typical winter exposure (when levels are
-                    highest)
-                  </li>
-                </ul>
-
-                <div className="bg-dark-card border border-subtle rounded-lg p-6">
-                  <h4 className="text-lg font-semibold text-text-primary mb-3">
-                    You should test if:
-                  </h4>
-                  <ul className="space-y-2">
-                    <li>• You&apos;ve never tested your home</li>
-                    <li>
-                      • It&apos;s been more than 2 years since your last test
-                    </li>
-                    <li>• You&apos;ve done major renovations</li>
-                    <li>
-                      • You&apos;ve finished a basement or changed occupancy
-                      patterns
-                    </li>
-                    <li>• You&apos;re buying or selling a home</li>
-                    <li>
-                      • You have a radon mitigation system (to verify it&apos;s
-                      working)
-                    </li>
-                  </ul>
-                </div>
               </div>
 
               <div>
@@ -1052,14 +951,10 @@ export default function LearnPage() {
                     <li>
                       • Long-term average is most accurate for annual exposure
                     </li>
-                    <li>
-                      • Weather, barometric pressure, and usage patterns all
-                      affect levels
-                    </li>
                   </ul>
                 </div>
 
-                <div className="space-y-4 mb-8">
+                <div className="space-y-4">
                   <div className="bg-dark-card border border-subtle rounded-lg p-5">
                     <h5 className="font-semibold text-accent-gold mb-2">
                       1. Alpha Track Detectors
@@ -1112,67 +1007,19 @@ export default function LearnPage() {
                     </div>
                   </div>
                 </div>
-
-                <h4 className="text-xl font-semibold text-text-primary mb-3 font-serif">
-                  Short-Term Tests (2-7 days)
-                </h4>
-                <div className="bg-amber-900/20 border-l-4 border-amber-500 rounded-r-lg p-6">
-                  <h5 className="font-semibold text-amber-400 mb-2">
-                    Why NOT to rely on short-term tests alone:
-                  </h5>
-                  <ul className="space-y-2">
-                    <li>
-                      • Can be misleading (much higher OR lower than annual
-                      average)
-                    </li>
-                    <li>• Influenced by weather events</li>
-                    <li>• Temporary conditions (windows open/closed)</li>
-                    <li>• Not representative of long-term exposure</li>
-                  </ul>
-                </div>
-              </div>
-
-              <div>
-                <h3 className="text-2xl font-semibold text-text-primary mb-4 font-serif">
-                  How to Test Properly
-                </h3>
-                <div className="grid md:grid-cols-2 gap-6">
-                  <div className="bg-dark-card border border-subtle rounded-lg p-5">
-                    <h4 className="font-semibold text-accent-gold mb-3">
-                      Where to Place Detector:
-                    </h4>
-                    <ul className="space-y-2 text-sm">
-                      <li>
-                        ✓ Lowest lived-in level (basement if used regularly)
-                      </li>
-                      <li>✓ Bedroom or family room (where you spend time)</li>
-                      <li>✓ Central location, away from exterior walls</li>
-                      <li>✓ At least 20 inches above floor</li>
-                      <li>✓ At least 12 inches from exterior walls</li>
-                    </ul>
-                  </div>
-                  <div className="bg-dark-card border border-subtle rounded-lg p-5">
-                    <h4 className="font-semibold text-red-400 mb-3">
-                      Where NOT to Place:
-                    </h4>
-                    <ul className="space-y-2 text-sm">
-                      <li>✗ Kitchens (cooking particles interfere)</li>
-                      <li>✗ Bathrooms (humidity affects detectors)</li>
-                      <li>✗ Laundry rooms (dryer vents change pressure)</li>
-                      <li>✗ Near exterior doors or windows</li>
-                      <li>✗ Near heat sources or high humidity</li>
-                    </ul>
-                  </div>
-                </div>
               </div>
             </div>
-          </section>
+          </div>
+        );
 
-          {/* Reducing Radon Levels */}
-          <section id="mitigation" className="mb-16 scroll-mt-24">
-            <h2 className="text-4xl font-bold text-text-primary mb-6 font-serif border-b border-subtle pb-3">
-              Reducing Radon Levels
-            </h2>
+      case 5: // Reducing Radon Levels
+        return (
+          <div className="space-y-8 animate-fadeIn">
+            <div>
+              <h2 className="text-4xl font-bold text-text-primary mb-6 font-serif border-b border-subtle pb-3">
+                Reducing Radon Levels
+              </h2>
+            </div>
 
             <div className="space-y-6 text-text-secondary">
               <div className="bg-accent-gold/10 border-l-4 border-accent-gold rounded-r-lg p-6">
@@ -1191,19 +1038,12 @@ export default function LearnPage() {
                     • You want to reduce radon as much as reasonably possible
                   </li>
                 </ul>
-                <p className="mt-4 font-semibold text-text-primary">
-                  Remember: Any reduction in radon reduces lung cancer risk.
-                  Even homes below 200 Bq/m³ benefit from mitigation.
-                </p>
               </div>
 
               <div>
                 <h3 className="text-2xl font-semibold text-text-primary mb-4 font-serif">
                   Active Soil Depressurization (ASD) - The Gold Standard
                 </h3>
-                <p className="leading-relaxed mb-4 italic text-text-secondary">
-                  Also called: Sub-slab depressurization, soil suction
-                </p>
 
                 <div className="bg-dark-card border border-accent-gold rounded-lg p-6 mb-6">
                   <h4 className="text-lg font-semibold text-text-primary mb-3">
@@ -1247,11 +1087,10 @@ export default function LearnPage() {
                       </strong>
                     </li>
                     <li>• Operates 24/7 automatically</li>
-                    <li>• Doesn&apos;t require behavior changes</li>
                   </ul>
                 </div>
 
-                <div className="grid md:grid-cols-3 gap-4 mb-6">
+                <div className="grid md:grid-cols-3 gap-4">
                   <div className="bg-dark-card border border-subtle rounded-lg p-5 text-center">
                     <p className="text-sm text-text-secondary mb-2">
                       Installation
@@ -1286,214 +1125,19 @@ export default function LearnPage() {
                     </p>
                   </div>
                 </div>
-
-                <div className="space-y-4">
-                  <h4 className="text-lg font-semibold text-text-primary font-serif">
-                    Types of ASD Systems:
-                  </h4>
-                  <div className="grid md:grid-cols-2 gap-4">
-                    <div className="bg-dark-card border border-subtle rounded-lg p-5">
-                      <h5 className="font-semibold text-accent-gold mb-2">
-                        Sub-slab suction
-                      </h5>
-                      <p className="text-sm">
-                        Most common. For homes with concrete slab floors.
-                        Pipe(s) penetrate slab to gravel layer beneath.
-                      </p>
-                    </div>
-                    <div className="bg-dark-card border border-subtle rounded-lg p-5">
-                      <h5 className="font-semibold text-accent-gold mb-2">
-                        Drain tile suction
-                      </h5>
-                      <p className="text-sm">
-                        Uses existing perimeter drain tiles as suction pathway.
-                        Effective if drain tiles fully encircle foundation.
-                      </p>
-                    </div>
-                    <div className="bg-dark-card border border-subtle rounded-lg p-5">
-                      <h5 className="font-semibold text-accent-gold mb-2">
-                        Block wall suction
-                      </h5>
-                      <p className="text-sm">
-                        For hollow concrete block foundations. Creates suction
-                        within hollow cores of blocks.
-                      </p>
-                    </div>
-                    <div className="bg-dark-card border border-subtle rounded-lg p-5">
-                      <h5 className="font-semibold text-accent-gold mb-2">
-                        Submembrane suction
-                      </h5>
-                      <p className="text-sm">
-                        For crawl spaces with dirt floors. Plastic sheeting
-                        sealed over entire dirt floor.
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <div>
-                <h3 className="text-2xl font-semibold text-text-primary mb-4 font-serif">
-                  Other Mitigation Techniques
-                </h3>
-                <div className="space-y-4">
-                  <div className="bg-dark-card border border-subtle rounded-lg p-5">
-                    <div className="flex justify-between items-start mb-2">
-                      <h4 className="font-semibold text-text-primary">
-                        1. Sealing Cracks and Openings
-                      </h4>
-                      <span className="text-sm bg-amber-900/30 text-amber-400 px-3 py-1 rounded">
-                        10-20% effective
-                      </span>
-                    </div>
-                    <p className="text-sm mb-2">
-                      Seal foundation cracks, gaps around pipes, and joints with
-                      polyurethane caulk.
-                    </p>
-                    <p className="text-sm text-amber-400">
-                      <strong>Use:</strong> Always done in combination with ASD
-                      to improve efficiency, NOT effective alone.
-                    </p>
-                  </div>
-
-                  <div className="bg-dark-card border border-subtle rounded-lg p-5">
-                    <div className="flex justify-between items-start mb-2">
-                      <h4 className="font-semibold text-text-primary">
-                        2. House/Room Pressurization
-                      </h4>
-                      <span className="text-sm bg-blue-900/30 text-blue-400 px-3 py-1 rounded">
-                        50-80% effective
-                      </span>
-                    </div>
-                    <p className="text-sm mb-2">
-                      Fan blows outside air into basement, creating positive
-                      pressure to prevent radon entry.
-                    </p>
-                    <p className="text-sm text-amber-400">
-                      <strong>Drawbacks:</strong> High energy costs, can
-                      interfere with combustion appliances.
-                    </p>
-                  </div>
-
-                  <div className="bg-dark-card border border-subtle rounded-lg p-5">
-                    <div className="flex justify-between items-start mb-2">
-                      <h4 className="font-semibold text-text-primary">
-                        3. Heat Recovery Ventilation (HRV/ERV)
-                      </h4>
-                      <span className="text-sm bg-blue-900/30 text-blue-400 px-3 py-1 rounded">
-                        20-50% effective
-                      </span>
-                    </div>
-                    <p className="text-sm mb-2">
-                      Mechanical ventilation system exchanges indoor and outdoor
-                      air.
-                    </p>
-                    <p className="text-sm text-amber-400">
-                      <strong>Drawbacks:</strong> Doesn&apos;t prevent radon
-                      entry, just dilutes it. Expensive to operate.
-                    </p>
-                  </div>
-
-                  <div className="bg-dark-card border border-subtle rounded-lg p-5">
-                    <div className="flex justify-between items-start mb-2">
-                      <h4 className="font-semibold text-text-primary">
-                        4. Natural Ventilation
-                      </h4>
-                      <span className="text-sm bg-red-900/30 text-red-400 px-3 py-1 rounded">
-                        Temporary only
-                      </span>
-                    </div>
-                    <p className="text-sm mb-2">
-                      Opening windows and doors to increase air exchange.
-                    </p>
-                    <p className="text-sm text-red-400">
-                      <strong>Drawbacks:</strong> Radon returns within ~12 hours
-                      of closing windows. Not practical in winter.
-                    </p>
-                  </div>
-                </div>
-              </div>
-
-              <div>
-                <h3 className="text-2xl font-semibold text-text-primary mb-4 font-serif">
-                  Choosing a Mitigation Contractor
-                </h3>
-                <div className="bg-dark-card border border-subtle rounded-lg p-6 mb-4">
-                  <h4 className="text-lg font-semibold text-text-primary mb-3">
-                    Qualifications to look for:
-                  </h4>
-                  <ul className="space-y-2">
-                    <li>
-                      • <strong>Certification:</strong> C-NRPP certified radon
-                      mitigation professional
-                    </li>
-                    <li>
-                      • <strong>Experience:</strong> Multiple years of radon
-                      mitigation work
-                    </li>
-                    <li>
-                      • <strong>References:</strong> Ask for past customer
-                      references
-                    </li>
-                    <li>
-                      • <strong>Warranty:</strong> System warranty and guarantee
-                      of results
-                    </li>
-                    <li>
-                      • <strong>Insurance:</strong> Liability and worker&apos;s
-                      compensation insurance
-                    </li>
-                  </ul>
-                </div>
-                <div className="bg-red-900/20 border-l-4 border-red-500 rounded-r-lg p-6">
-                  <h4 className="text-lg font-semibold text-red-400 mb-3">
-                    Red flags:
-                  </h4>
-                  <ul className="space-y-2">
-                    <li>
-                      • Guarantees radon will be reduced to zero (impossible to
-                      guarantee)
-                    </li>
-                    <li>• Won&apos;t provide written contract or estimate</li>
-                    <li>• Pressure tactics or extremely low bids</li>
-                    <li>• Not certified or insured</li>
-                    <li>• Can&apos;t explain how the system works</li>
-                  </ul>
-                </div>
-              </div>
-
-              <div>
-                <h3 className="text-2xl font-semibold text-text-primary mb-4 font-serif">
-                  Post-Mitigation Testing
-                </h3>
-                <div className="bg-green-900/20 border-l-4 border-green-500 rounded-r-lg p-6">
-                  <p className="font-semibold text-green-400 mb-3">
-                    Critical step: Test your home 24 hours to 30 days after
-                    system installation
-                  </p>
-                  <p className="leading-relaxed mb-3">Why:</p>
-                  <ul className="space-y-2">
-                    <li>• Verify system is working properly</li>
-                    <li>• Confirm radon reduced to acceptable level</li>
-                    <li>• Establish baseline for future comparison</li>
-                    <li>• Required for warranty compliance</li>
-                  </ul>
-                  <p className="mt-4">
-                    <strong className="text-text-primary">
-                      Ongoing testing:
-                    </strong>{" "}
-                    Retest every 2 years even with mitigation system.
-                  </p>
-                </div>
               </div>
             </div>
-          </section>
+          </div>
+        );
 
-          {/* Radon in Canada */}
-          <section id="canada" className="mb-16 scroll-mt-24">
-            <h2 className="text-4xl font-bold text-text-primary mb-6 font-serif border-b border-subtle pb-3">
-              Radon in Canada
-            </h2>
+      case 6: // Radon in Canada
+        return (
+          <div className="space-y-8 animate-fadeIn">
+            <div>
+              <h2 className="text-4xl font-bold text-text-primary mb-6 font-serif border-b border-subtle pb-3">
+                Radon in Canada
+              </h2>
+            </div>
 
             <div className="space-y-6 text-text-secondary">
               <div>
@@ -1521,21 +1165,6 @@ export default function LearnPage() {
                     </p>
                     <p className="text-xs text-text-secondary mt-1">
                       attributable to radon
-                    </p>
-                  </div>
-                  <div className="bg-dark-card border border-subtle rounded-lg p-6 text-center">
-                    <p className="text-4xl font-bold text-text-primary mb-2">
-                      6.9%
-                    </p>
-                    <p className="text-sm">of homes exceed 400 Bq/m³</p>
-                  </div>
-                  <div className="bg-dark-card border border-subtle rounded-lg p-6 text-center">
-                    <p className="text-4xl font-bold text-text-primary mb-2">
-                      16%
-                    </p>
-                    <p className="text-sm">of all lung cancer deaths</p>
-                    <p className="text-xs text-text-secondary mt-1">
-                      in Canada are radon-related
                     </p>
                   </div>
                 </div>
@@ -1569,59 +1198,6 @@ export default function LearnPage() {
 
               <div>
                 <h3 className="text-2xl font-semibold text-text-primary mb-4 font-serif">
-                  Health Canada Radon Guideline
-                </h3>
-                <div className="bg-accent-gold/10 border-l-4 border-accent-gold rounded-r-lg p-6 mb-4">
-                  <p className="text-3xl font-bold text-accent-gold mb-2">
-                    200 Bq/m³
-                  </p>
-                  <p className="text-sm text-text-secondary mb-4">
-                    Current guideline (established 2007)
-                  </p>
-                  <div className="space-y-2">
-                    <p>
-                      <strong className="text-text-primary">History:</strong>
-                    </p>
-                    <ul className="list-disc pl-6 space-y-1">
-                      <li>1988: First guideline at 800 Bq/m³</li>
-                      <li>
-                        2007: Reduced to 200 Bq/m³ based on growing evidence
-                      </li>
-                    </ul>
-                  </div>
-                </div>
-
-                <div className="bg-dark-card border border-subtle rounded-lg p-6">
-                  <h4 className="text-lg font-semibold text-text-primary mb-3">
-                    International Comparison:
-                  </h4>
-                  <div className="space-y-2">
-                    <div className="flex justify-between items-center">
-                      <span>WHO</span>
-                      <span className="font-semibold text-accent-blue">
-                        100 Bq/m³
-                      </span>
-                    </div>
-                    <div className="flex justify-between items-center">
-                      <span>Canada</span>
-                      <span className="font-semibold text-accent-gold">
-                        200 Bq/m³
-                      </span>
-                    </div>
-                    <div className="flex justify-between items-center">
-                      <span>USA (EPA)</span>
-                      <span className="font-semibold">148 Bq/m³ (4 pCi/L)</span>
-                    </div>
-                    <div className="flex justify-between items-center">
-                      <span>European Union</span>
-                      <span className="font-semibold">100-300 Bq/m³</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <div>
-                <h3 className="text-2xl font-semibold text-text-primary mb-4 font-serif">
                   Canadian Radon Resources
                 </h3>
                 <div className="grid md:grid-cols-2 gap-4">
@@ -1634,17 +1210,6 @@ export default function LearnPage() {
                     </p>
                     <p className="text-xs text-text-secondary">
                       Certifies radon measurement and mitigation professionals
-                    </p>
-                  </div>
-                  <div className="bg-dark-card border border-subtle rounded-lg p-5">
-                    <h4 className="font-semibold text-accent-gold mb-2">
-                      CARST
-                    </h4>
-                    <p className="text-sm mb-2">
-                      Canadian Association of Radon Scientists and Technologists
-                    </p>
-                    <p className="text-xs text-text-secondary">
-                      Professional association and educational resources
                     </p>
                   </div>
                   <div className="bg-dark-card border border-subtle rounded-lg p-5">
@@ -1665,165 +1230,124 @@ export default function LearnPage() {
                       Test kit purchasing information
                     </p>
                   </div>
+                  <div className="bg-dark-card border border-subtle rounded-lg p-5">
+                    <h4 className="font-semibold text-accent-gold mb-2">
+                      BC Lung Foundation
+                    </h4>
+                    <p className="text-sm mb-2">Long-term detector kits</p>
+                    <p className="text-xs text-text-secondary">
+                      $49.99 including analysis
+                    </p>
+                  </div>
                 </div>
-              </div>
-
-              <div>
-                <h3 className="text-2xl font-semibold text-text-primary mb-4 font-serif">
-                  Where to Get Test Kits in Canada
-                </h3>
-                <div className="bg-accent-blue/10 border-l-4 border-accent-blue rounded-r-lg p-6">
-                  <h4 className="text-lg font-semibold text-accent-blue mb-3">
-                    Online retailers:
-                  </h4>
-                  <ul className="space-y-2">
-                    <li>
-                      • <strong>Take Action on Radon:</strong>{" "}
-                      takeactiononradon.ca
-                    </li>
-                    <li>
-                      • <strong>BC Lung Foundation:</strong> Long-term detector
-                      kits ($49.99)
-                    </li>
-                    <li>
-                      • <strong>Amazon.ca:</strong> Various alpha track and
-                      electronic monitors
-                    </li>
-                    <li>
-                      • <strong>Hardware stores:</strong> Some Home Hardware,
-                      RONA locations
-                    </li>
-                  </ul>
-                  <h4 className="text-lg font-semibold text-accent-blue mb-3 mt-4">
-                    Free/subsidized programs:
-                  </h4>
-                  <ul className="space-y-2">
-                    <li>• Some municipalities offer free test kit programs</li>
-                    <li>
-                      • Library loan programs (BC Interior Health has free
-                      electronic monitor loans)
-                    </li>
-                    <li>
-                      • Radon awareness events often distribute free test kits
-                    </li>
-                  </ul>
-                </div>
-              </div>
-
-              <div className="bg-dark-card border border-subtle rounded-lg p-6">
-                <h3 className="text-2xl font-semibold text-text-primary mb-4 font-serif">
-                  November is Radon Action Month
-                </h3>
-                <p className="leading-relaxed">
-                  Join the national awareness campaign. Test your home, spread
-                  the word, and help reduce radon-related lung cancer in Canada.
-                </p>
-                <p className="mt-3 text-sm text-text-secondary">
-                  #TestForRadon #EvictRadon
-                </p>
               </div>
             </div>
-          </section>
+          </div>
+        );
 
-          {/* Final Quiz */}
-          <section id="quiz" className="mb-16 scroll-mt-24">
-            <h2 className="text-4xl font-bold text-text-primary mb-6 font-serif border-b border-subtle pb-3">
-              Final Quiz
-            </h2>
+      case 7: // Final Quiz
+        return (
+          <div className="space-y-8 animate-fadeIn">
+            <div>
+              <h2 className="text-4xl font-bold text-text-primary mb-6 font-serif border-b border-subtle pb-3">
+                Final Quiz
+              </h2>
+            </div>
 
             <p className="text-text-secondary mb-8">
               Test your knowledge! Answer these questions to verify your
-              understanding of radon.
+              understanding of radon. You&apos;ll receive immediate feedback.
             </p>
 
             <div className="space-y-6">
-              {QUIZ_QUESTIONS.map((question) => (
-                <div
-                  key={question.id}
-                  className="bg-dark-card border border-subtle rounded-lg p-6"
-                >
-                  <h3 className="text-lg font-semibold text-text-primary mb-4">
-                    Question {question.id}: {question.question}
-                  </h3>
-                  <div className="space-y-3">
-                    {question.options.map((option, index) => {
-                      const isSelected = quizAnswers[question.id] === index;
-                      const isCorrect = question.correctAnswer === index;
-                      const showResult = showQuizResults && isSelected;
+              {QUIZ_QUESTIONS.map((question) => {
+                const selectedAnswer = quizAnswers[question.id];
+                const hasAnswered = selectedAnswer !== undefined;
+                const isCorrect = selectedAnswer === question.correctAnswer;
 
-                      return (
-                        <button
-                          key={index}
-                          onClick={() =>
-                            !showQuizResults &&
-                            handleQuizAnswer(question.id, index)
-                          }
-                          disabled={showQuizResults}
-                          className={`w-full text-left p-4 rounded-lg border transition-all ${
-                            isSelected && !showQuizResults
-                              ? "border-accent-gold bg-accent-gold/10"
-                              : "border-subtle hover:border-accent-gold/50 hover:bg-dark-card-hover"
-                          } ${
-                            showResult && isCorrect
-                              ? "border-green-500 bg-green-900/20"
-                              : showResult && !isCorrect
-                                ? "border-red-500 bg-red-900/20"
-                                : ""
-                          } ${showQuizResults ? "cursor-default" : ""}`}
-                        >
-                          <span className="text-text-secondary">{option}</span>
-                        </button>
-                      );
-                    })}
-                  </div>
-                  {showQuizResults &&
-                    quizAnswers[question.id] !== undefined && (
+                return (
+                  <div
+                    key={question.id}
+                    className="bg-dark-card border border-subtle rounded-lg p-6"
+                  >
+                    <h3 className="text-lg font-semibold text-text-primary mb-4">
+                      Question {question.id}: {question.question}
+                    </h3>
+                    <div className="space-y-3">
+                      {question.options.map((option, index) => {
+                        const isSelected = selectedAnswer === index;
+                        const isThisCorrect = question.correctAnswer === index;
+
+                        return (
+                          <button
+                            key={index}
+                            onClick={() => handleQuizAnswer(question.id, index)}
+                            className={`w-full text-left p-4 rounded-lg border transition-all ${
+                              isSelected && !hasAnswered
+                                ? "border-accent-gold bg-accent-gold/10"
+                                : !hasAnswered
+                                  ? "border-subtle hover:border-accent-gold/50 hover:bg-dark-card-hover"
+                                  : isSelected && isCorrect
+                                    ? "border-green-500 bg-green-900/20"
+                                    : isSelected && !isCorrect
+                                      ? "border-red-500 bg-red-900/20"
+                                      : isThisCorrect && hasAnswered
+                                        ? "border-green-500/50 bg-green-900/10"
+                                        : "border-subtle bg-dark-card-hover/50 cursor-default"
+                            }`}
+                          >
+                            <div className="flex items-start gap-3">
+                              {hasAnswered && isThisCorrect && (
+                                <span className="text-green-400 text-lg">
+                                  ✓
+                                </span>
+                              )}
+                              {hasAnswered && isSelected && !isCorrect && (
+                                <span className="text-red-400 text-lg">✗</span>
+                              )}
+                              <span
+                                className={
+                                  hasAnswered && isThisCorrect
+                                    ? "text-green-400"
+                                    : "text-text-secondary"
+                                }
+                              >
+                                {option}
+                              </span>
+                            </div>
+                          </button>
+                        );
+                      })}
+                    </div>
+                    {hasAnswered && (
                       <div
                         className={`mt-4 p-4 rounded-lg border-l-4 ${
-                          quizAnswers[question.id] === question.correctAnswer
+                          isCorrect
                             ? "border-green-500 bg-green-900/20"
                             : "border-red-500 bg-red-900/20"
                         }`}
                       >
                         <p
                           className={`font-semibold mb-2 ${
-                            quizAnswers[question.id] === question.correctAnswer
-                              ? "text-green-400"
-                              : "text-red-400"
+                            isCorrect ? "text-green-400" : "text-red-400"
                           }`}
                         >
-                          {quizAnswers[question.id] === question.correctAnswer
-                            ? "✓ Correct!"
-                            : "✗ Incorrect"}
+                          {isCorrect ? "✓ Correct!" : "✗ Incorrect"}
                         </p>
                         <p className="text-sm text-text-secondary">
                           {question.explanation}
                         </p>
                       </div>
                     )}
-                </div>
-              ))}
+                  </div>
+                );
+              })}
             </div>
 
-            {!showQuizResults &&
-              Object.keys(quizAnswers).length === QUIZ_QUESTIONS.length && (
-                <div className="mt-8 text-center">
-                  <button
-                    onClick={handleQuizSubmit}
-                    className="bg-accent-gold hover:bg-accent-gold/90 text-dark-bg px-8 py-4 rounded-lg font-bold text-lg transition-all"
-                  >
-                    Submit Quiz
-                  </button>
-                </div>
-              )}
-
-            {showQuizResults && (
-              <div
-                id="quiz-results"
-                className="mt-8 bg-gradient-to-r from-accent-gold/20 to-accent-blue/20 border border-accent-gold rounded-lg p-8 text-center"
-              >
+            {Object.keys(quizAnswers).length === QUIZ_QUESTIONS.length && (
+              <div className="mt-8 bg-gradient-to-r from-accent-gold/20 to-accent-blue/20 border border-accent-gold rounded-lg p-8 text-center">
                 <h3 className="text-3xl font-bold text-text-primary mb-4 font-serif">
-                  Quiz Results
+                  Quiz Complete!
                 </h3>
                 <p className="text-5xl font-bold text-accent-gold mb-4">
                   {quizScore} / {QUIZ_QUESTIONS.length}
@@ -1833,20 +1357,13 @@ export default function LearnPage() {
                     ? "🎉 Perfect score! You're a radon expert!"
                     : quizScore >= QUIZ_QUESTIONS.length * 0.7
                       ? "Great job! You have a solid understanding of radon."
-                      : "Keep learning! Review the material above to strengthen your knowledge."}
+                      : "Keep learning! Review the material to strengthen your knowledge."}
                 </p>
                 <div className="flex gap-4 justify-center flex-wrap">
                   <button
                     onClick={() => {
-                      setShowQuizResults(false);
                       setQuizAnswers({});
-                      const quizElement = document.getElementById("quiz");
-                      if (quizElement) {
-                        window.scrollTo({
-                          top: quizElement.offsetTop - 100,
-                          behavior: "smooth",
-                        });
-                      }
+                      window.scrollTo({ top: 0, behavior: "smooth" });
                     }}
                     className="bg-dark-card hover:bg-dark-card-hover border border-subtle text-text-primary px-6 py-3 rounded-lg font-semibold transition-all"
                   >
@@ -1861,31 +1378,144 @@ export default function LearnPage() {
                 </div>
               </div>
             )}
-          </section>
 
-          {/* Footer CTA */}
-          <div className="bg-gradient-to-r from-accent-gold/10 to-accent-blue/10 border border-accent-gold rounded-lg p-8 text-center">
-            <h2 className="text-3xl font-bold text-text-primary mb-4 font-serif">
-              Ready to Take Action?
+            <div className="bg-gradient-to-r from-accent-gold/10 to-accent-blue/10 border border-accent-gold rounded-lg p-8 text-center mt-8">
+              <h2 className="text-3xl font-bold text-text-primary mb-4 font-serif">
+                Ready to Take Action?
+              </h2>
+              <p className="text-text-secondary mb-6 max-w-2xl mx-auto">
+                You now have comprehensive knowledge about radon. Use our
+                AI-powered prediction tool to estimate radon levels in your
+                home, or visit our dashboard to explore radon data across
+                Canada.
+              </p>
+              <div className="flex gap-4 justify-center flex-wrap">
+                <Link
+                  href="/predict"
+                  className="bg-accent-gold hover:bg-accent-gold/90 text-dark-bg px-8 py-4 rounded-lg font-bold text-lg transition-all inline-block"
+                >
+                  Predict Radon Risk
+                </Link>
+                <Link
+                  href="/dashboard"
+                  className="bg-dark-card hover:bg-dark-card-hover border border-subtle text-text-primary px-8 py-4 rounded-lg font-bold text-lg transition-all inline-block"
+                >
+                  View Dashboard
+                </Link>
+              </div>
+            </div>
+          </div>
+        );
+
+      default:
+        return null;
+    }
+  };
+
+  return (
+    <div className="min-h-screen bg-dark-bg flex flex-col">
+      {/* Top Navigation */}
+      <div className="border-b border-subtle bg-dark-card/50 backdrop-blur-sm">
+        <div className="container mx-auto px-4 py-4">
+          <Link
+            href="/"
+            className="text-accent-gold hover:text-text-primary font-semibold transition-colors inline-flex items-center gap-2"
+          >
+            <span>←</span> Back to Home
+          </Link>
+        </div>
+      </div>
+
+      <div className="flex flex-1">
+        {/* Side Navigation */}
+        <aside className="hidden lg:block w-80 border-r border-subtle bg-dark-card/30">
+          <div className="p-6 sticky top-0">
+            <h2 className="text-2xl font-bold text-text-primary mb-6 font-serif">
+              Learning Center
             </h2>
-            <p className="text-text-secondary mb-6 max-w-2xl mx-auto">
-              You now have comprehensive knowledge about radon. Use our
-              AI-powered prediction tool to estimate radon levels in your home,
-              or visit our dashboard to explore radon data across Canada.
-            </p>
-            <div className="flex gap-4 justify-center flex-wrap">
-              <Link
-                href="/predict"
-                className="bg-accent-gold hover:bg-accent-gold/90 text-dark-bg px-8 py-4 rounded-lg font-bold text-lg transition-all inline-block"
+            <nav className="space-y-1">
+              {SECTIONS.map((section, index) => (
+                <button
+                  key={section.id}
+                  onClick={() => goToPage(index)}
+                  className={`w-full text-left px-4 py-2 rounded-lg transition-all ${
+                    currentPage === index
+                      ? "bg-accent-gold text-dark-bg font-semibold"
+                      : "text-text-secondary hover:text-text-primary hover:bg-dark-card-hover"
+                  }`}
+                >
+                  {section.label}
+                </button>
+              ))}
+            </nav>
+
+            {/* Progress Indicator */}
+            <div className="mt-8 pt-6 border-t border-subtle">
+              <p className="text-sm text-text-secondary mb-2">Progress</p>
+              <div className="flex items-center gap-2">
+                <div className="flex-1 bg-dark-card-hover rounded-full h-2">
+                  <div
+                    className="bg-accent-gold rounded-full h-2 transition-all duration-300"
+                    style={{
+                      width: `${((currentPage + 1) / SECTIONS.length) * 100}%`,
+                    }}
+                  ></div>
+                </div>
+                <span className="text-sm font-semibold text-accent-gold">
+                  {currentPage + 1}/{SECTIONS.length}
+                </span>
+              </div>
+            </div>
+          </div>
+        </aside>
+
+        {/* Main Content */}
+        <main className="flex-1 flex flex-col">
+          <div className="flex-1 px-4 lg:px-12 py-12 max-w-5xl mx-auto w-full">
+            {/* Header */}
+            <div className="mb-12">
+              <h1 className="text-5xl font-bold text-text-primary mb-4 font-serif">
+                RadonVision Learning Center
+              </h1>
+              <p className="text-xl text-text-secondary">
+                Complete Guide to Understanding Radon
+              </p>
+            </div>
+
+            {/* Page Content */}
+            {renderPageContent()}
+          </div>
+
+          {/* Navigation Buttons */}
+          <div className="border-t border-subtle bg-dark-card/30 px-4 lg:px-12 py-6">
+            <div className="max-w-5xl mx-auto flex justify-between items-center">
+              <button
+                onClick={prevPage}
+                disabled={currentPage === 0}
+                className={`px-6 py-3 rounded-lg font-semibold transition-all inline-flex items-center gap-2 ${
+                  currentPage === 0
+                    ? "bg-dark-card text-text-secondary cursor-not-allowed opacity-50"
+                    : "bg-dark-card hover:bg-dark-card-hover border border-subtle text-text-primary"
+                }`}
               >
-                Predict Radon Risk
-              </Link>
-              <Link
-                href="/dashboard"
-                className="bg-dark-card hover:bg-dark-card-hover border border-subtle text-text-primary px-8 py-4 rounded-lg font-bold text-lg transition-all inline-block"
+                <span>←</span> Previous
+              </button>
+
+              <span className="text-sm text-text-secondary hidden md:block">
+                {SECTIONS[currentPage].label}
+              </span>
+
+              <button
+                onClick={nextPage}
+                disabled={currentPage === SECTIONS.length - 1}
+                className={`px-6 py-3 rounded-lg font-semibold transition-all inline-flex items-center gap-2 ${
+                  currentPage === SECTIONS.length - 1
+                    ? "bg-dark-card text-text-secondary cursor-not-allowed opacity-50"
+                    : "bg-accent-gold hover:bg-accent-gold/90 text-dark-bg"
+                }`}
               >
-                View Dashboard
-              </Link>
+                Next <span>→</span>
+              </button>
             </div>
           </div>
         </main>
