@@ -30,11 +30,17 @@ export default function Lesson({
       <div className="bg-dark-card/50 border border-subtle p-6 rounded-lg opacity-50">
         <div className="flex items-center gap-4 mb-4">
           <div className="w-10 h-10 bg-text-secondary/20 border border-subtle rounded-full flex items-center justify-center">
-            <span className="text-text-secondary font-bold">{lessonNumber}</span>
+            <span className="text-text-secondary font-bold">
+              {lessonNumber}
+            </span>
           </div>
-          <h2 className="text-2xl font-bold text-text-secondary font-serif">🔒 {title}</h2>
+          <h2 className="text-2xl font-bold text-text-secondary font-serif">
+            🔒 {title}
+          </h2>
         </div>
-        <p className="text-text-secondary">Complete the previous lesson to unlock</p>
+        <p className="text-text-secondary">
+          Complete the previous lesson to unlock
+        </p>
       </div>
     );
   }

@@ -37,7 +37,9 @@ export default function CanadaMap() {
         <h3 className="text-2xl font-bold mb-4 text-gray-900 dark:text-white">
           Canada-Wide Radon Risk Map
         </h3>
-        <p className="text-text-secondary">Loading real data from Health Canada...</p>
+        <p className="text-text-secondary">
+          Loading real data from Health Canada...
+        </p>
       </div>
     );
   }
@@ -59,7 +61,9 @@ export default function CanadaMap() {
         Canada-Wide Radon Risk Map
       </h3>
       <p className="text-sm text-text-secondary mb-6">
-        Real data from Health Canada&apos;s Cross-Canada Survey ({provinces.reduce((sum, p) => sum + p.count, 0).toLocaleString()} measurements)
+        Real data from Health Canada&apos;s Cross-Canada Survey (
+        {provinces.reduce((sum, p) => sum + p.count, 0).toLocaleString()}{" "}
+        measurements)
       </p>
 
       {/* Map representation */}
@@ -84,7 +88,9 @@ export default function CanadaMap() {
             </div>
             <div className="text-xs text-gray-500 dark:text-gray-400 space-y-1">
               <div>Median: {province.median} Bq/m³</div>
-              <div>Range: {province.min} - {province.max} Bq/m³</div>
+              <div>
+                Range: {province.min} - {province.max} Bq/m³
+              </div>
               <div>{province.count.toLocaleString()} tests</div>
             </div>
           </div>
@@ -119,4 +125,3 @@ export default function CanadaMap() {
     </div>
   );
 }
-

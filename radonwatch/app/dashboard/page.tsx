@@ -50,9 +50,7 @@ export default function DashboardPage() {
     return (
       <div className="min-h-screen bg-dark-bg flex items-center justify-center">
         <div className="text-center">
-          <p className="text-text-secondary mb-4">
-            Loading your results...
-          </p>
+          <p className="text-text-secondary mb-4">Loading your results...</p>
         </div>
       </div>
     );
@@ -92,9 +90,7 @@ export default function DashboardPage() {
               </h3>
               <div className="space-y-3">
                 <div className="flex justify-between">
-                  <span className="text-text-secondary">
-                    Radon Level:
-                  </span>
+                  <span className="text-text-secondary">Radon Level:</span>
                   <span className="font-bold text-text-primary">
                     {state.prediction.radonLevel} Bq/m³
                   </span>
@@ -116,9 +112,7 @@ export default function DashboardPage() {
                   </span>
                 </div>
                 <div className="flex justify-between">
-                  <span className="text-text-secondary">
-                    Regional Avg:
-                  </span>
+                  <span className="text-text-secondary">Regional Avg:</span>
                   <span className="font-bold text-text-primary">
                     {state.regionalAverage} Bq/m³
                   </span>
@@ -133,33 +127,25 @@ export default function DashboardPage() {
                 </h3>
                 <div className="space-y-2 text-sm">
                   <div>
-                    <span className="text-text-secondary">
-                      Region:
-                    </span>{" "}
+                    <span className="text-text-secondary">Region:</span>{" "}
                     <span className="text-text-primary">
                       {state.homeData.region.replace(/_/g, " ")}
                     </span>
                   </div>
                   <div>
-                    <span className="text-text-secondary">
-                      Age:
-                    </span>{" "}
+                    <span className="text-text-secondary">Age:</span>{" "}
                     <span className="text-text-primary">
                       {state.homeData.age} years
                     </span>
                   </div>
                   <div>
-                    <span className="text-text-secondary">
-                      Foundation:
-                    </span>{" "}
+                    <span className="text-text-secondary">Foundation:</span>{" "}
                     <span className="text-text-primary capitalize">
                       {state.homeData.foundation}
                     </span>
                   </div>
                   <div>
-                    <span className="text-text-secondary">
-                      Floor:
-                    </span>{" "}
+                    <span className="text-text-secondary">Floor:</span>{" "}
                     <span className="text-text-primary capitalize">
                       {state.homeData.floor}
                     </span>

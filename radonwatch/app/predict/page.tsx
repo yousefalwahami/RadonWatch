@@ -17,7 +17,7 @@ import {
 // Dynamically import 3D component to avoid SSR issues
 const HouseVisualization = dynamic(
   () => import("@/components/3d/HouseVisualization"),
-  { ssr: false }
+  { ssr: false },
 );
 
 export default function PredictPage() {

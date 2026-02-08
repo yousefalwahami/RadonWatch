@@ -199,9 +199,9 @@ export default function LearnPage() {
                 <p>
                   The model calculates a weighted score based on research from
                   Health Canada and scientific literature. Each factor has a
-                  &quot;multiplier&quot; or &quot;adder&quot; that contributes to the final
-                  prediction. This mimics how a real ML model would learn
-                  feature importance from training data.
+                  &quot;multiplier&quot; or &quot;adder&quot; that contributes
+                  to the final prediction. This mimics how a real ML model would
+                  learn feature importance from training data.
                 </p>
 
                 <div className="bg-purple-100 dark:bg-purple-900 border-l-4 border-purple-500 p-4 rounded">

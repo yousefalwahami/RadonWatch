@@ -66,7 +66,7 @@ function RadonParticles({
       positions[i * 3 + 1] += velocities[i * 3 + 1] * speedMultiplier;
       positions[i * 3 + 2] +=
         velocities[i * 3 + 2] * speedMultiplier +
-        ((timeVar * 1.5) % 1 - 0.5) * dispersal;
+        (((timeVar * 1.5) % 1) - 0.5) * dispersal;
 
       // Reset particles that go too high or out of bounds
       if (
@@ -76,7 +76,7 @@ function RadonParticles({
       ) {
         // Use a simple hash-based pseudo-random for deterministic resets
         const hash = (i * 12345 + Date.now()) % 1000;
-        positions[i * 3] = ((hash / 1000) - 0.5) * 4;
+        positions[i * 3] = (hash / 1000 - 0.5) * 4;
         positions[i * 3 + 1] = (((hash * 7) % 1000) / 1000) * -1;
         positions[i * 3 + 2] = (((hash * 13) % 1000) / 1000 - 0.5) * 3;
       }
@@ -85,7 +85,8 @@ function RadonParticles({
       if (ventilationActive && positions[i * 3 + 1] > 1) {
         const dispersionHash = (i * 7919 + Date.now()) % 1000;
         positions[i * 3] += (dispersionHash / 1000 - 0.5) * 0.05;
-        positions[i * 3 + 2] += ((dispersionHash * 3) % 1000 / 1000 - 0.5) * 0.05;
+        positions[i * 3 + 2] +=
+          (((dispersionHash * 3) % 1000) / 1000 - 0.5) * 0.05;
       }
     }
 
