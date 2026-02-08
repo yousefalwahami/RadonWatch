@@ -330,8 +330,14 @@ function MainHouse() {
       </group>
 
       {/* Front windows */}
-      <Window position={[-0.8, 1.8, -wallD / 2 - 0.1]} rotation={[0, Math.PI, 0]} />
-      <Window position={[0.8, 1.8, -wallD / 2 - 0.1]} rotation={[0, Math.PI, 0]} />
+      <Window
+        position={[-0.8, 1.8, -wallD / 2 - 0.1]}
+        rotation={[0, Math.PI, 0]}
+      />
+      <Window
+        position={[0.8, 1.8, -wallD / 2 - 0.1]}
+        rotation={[0, Math.PI, 0]}
+      />
 
       {/* Front door */}
       <Door position={[0, 1.4, -wallD / 2 - 0.1]} />
@@ -523,40 +529,6 @@ function Neighbourhood() {
         />
       </mesh>
 
-      {/* Individual lot lawns (lighter green) for near side — layer 2 */}
-      {[-8, 0, 8, 16].map((x, i) => (
-        <mesh
-          key={`lawn-near-${i}`}
-          position={[x, -0.04, 1.5]}
-          rotation={[-Math.PI / 2, 0, 0]}
-        >
-          <planeGeometry args={[7.2, 6.0]} />
-          <meshStandardMaterial
-            color="#3a7a28"
-            polygonOffset
-            polygonOffsetFactor={3}
-            polygonOffsetUnits={3}
-          />
-        </mesh>
-      ))}
-
-      {/* Individual lot lawns for far side — layer 2 */}
-      {[-8, 0, 8, 16].map((x, i) => (
-        <mesh
-          key={`lawn-far-${i}`}
-          position={[x, -0.04, -10.5]}
-          rotation={[-Math.PI / 2, 0, 0]}
-        >
-          <planeGeometry args={[7.2, 5.0]} />
-          <meshStandardMaterial
-            color="#3a7a28"
-            polygonOffset
-            polygonOffsetFactor={3}
-            polygonOffsetUnits={3}
-          />
-        </mesh>
-      ))}
-
       {/* Road running along X axis (in front of houses) — layer 3 */}
       <mesh position={[0, -0.03, -5.5]} rotation={[-Math.PI / 2, 0, 0]}>
         <planeGeometry args={[60, 4.5]} />
@@ -589,7 +561,7 @@ function Neighbourhood() {
       </mesh>
 
       {/* Driveways for main side houses — layer 5 */}
-      {[-8, 0, 8, 16].map((x, i) => (
+      {[-16, -8, 0, 8, 16].map((x, i) => (
         <mesh
           key={`driveway-near-${i}`}
           position={[x, -0.01, -2.0]}
@@ -606,7 +578,7 @@ function Neighbourhood() {
       ))}
 
       {/* Driveways for far side houses — layer 5 */}
-      {[-8, 0, 8, 16].map((x, i) => (
+      {[-16, -8, 0, 8, 16].map((x, i) => (
         <mesh
           key={`driveway-far-${i}`}
           position={[x, -0.01, -9.0]}
@@ -747,6 +719,17 @@ export default function HouseVisualization({
             ventilationActive={ventilationActive}
           />
 
+          {/* Near-side neighbour: left 2 */}
+          <NeighborHouse
+            position={[-16, 0, 0]}
+            wallColor="#d5c5b0"
+            roofColor="#6a4028"
+            wallW={3.3}
+            wallD={2.7}
+            wallH={1.95}
+            roofH={0.9}
+          />
+
           {/* Near-side neighbour: left 1 */}
           <NeighborHouse
             position={[-8, 0, 0]}
@@ -783,6 +766,18 @@ export default function HouseVisualization({
           />
 
           {/* ── Far side of street (z < -8) ── */}
+
+          <NeighborHouse
+            position={[-16, 0, -11]}
+            rotation={[0, Math.PI, 0]}
+            wallColor="#c0b3a0"
+            roofColor="#5a2e1a"
+            wallW={3.4}
+            wallD={2.8}
+            wallH={1.95}
+            roofH={0.85}
+            hasGarage
+          />
 
           <NeighborHouse
             position={[-8, 0, -11]}
