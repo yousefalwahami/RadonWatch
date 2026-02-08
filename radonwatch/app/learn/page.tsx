@@ -1475,7 +1475,7 @@ export default function LearnPage() {
             {/* Header */}
             <div className="mb-12">
               <h1 className="text-5xl font-bold text-text-primary mb-4 font-serif">
-                RadonVision Learning Center
+                RadonWatch Learning Center
               </h1>
               <p className="text-xl text-text-secondary">
                 Complete Guide to Understanding Radon
