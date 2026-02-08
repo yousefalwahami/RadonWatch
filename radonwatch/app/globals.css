@@ -28,12 +28,6 @@
   --shadow-glow-blue: 0 10px 30px rgba(74, 158, 255, 0.15);
 }
 
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
 body {
   background: #0f1419;
   color: #e8edf4;

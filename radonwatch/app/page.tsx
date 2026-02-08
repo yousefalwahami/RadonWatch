@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Card from "@/components/ui/Card";
 
 export default function Home() {
   return (
@@ -55,96 +56,84 @@ export default function Home() {
             Three steps to understanding your radon risk.
           </p>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-7 auto-rows-fr">
             {/* Step 1 */}
-            <div className="bg-dark-card border border-subtle rounded-2xl p-12 relative overflow-hidden group hover:bg-dark-card-hover hover:-translate-y-2 transition-all duration-400 hover:border-accent-gold/30 animate-[slideUp_0.6s_ease-out_0.1s_backwards]">
-              <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-b from-accent-gold/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-400 pointer-events-none"></div>
-
-              <div className="relative">
-                <div className="w-[70px] h-[70px] mx-auto mb-8 flex items-center justify-center bg-accent-gold/10 border border-accent-gold/20 rounded-[18px] relative">
-                  <svg
-                    className="w-9 h-9 stroke-accent-gold fill-none"
-                    strokeWidth="1.5"
-                    viewBox="0 0 24 24"
-                  >
-                    <path d="M12 2L2 7l10 5 10-5-10-5z" />
-                    <path d="M2 17l10 5 10-5M2 12l10 5 10-5" />
-                  </svg>
-                  <div className="absolute -top-2.5 -right-2.5 w-7 h-7 bg-accent-gold text-dark-bg rounded-full text-xs font-bold flex items-center justify-center">
-                    1
-                  </div>
+            <Card delay={0.1}>
+              <div className="w-[70px] h-[70px] mx-auto mb-8 flex items-center justify-center bg-accent-gold/10 border border-accent-gold/20 rounded-[18px] relative">
+                <svg
+                  className="w-9 h-9 stroke-accent-gold fill-none"
+                  strokeWidth="1.5"
+                  viewBox="0 0 24 24"
+                >
+                  <path d="M12 2L2 7l10 5 10-5-10-5z" />
+                  <path d="M2 17l10 5 10-5M2 12l10 5 10-5" />
+                </svg>
+                <div className="absolute -top-2.5 -right-2.5 w-7 h-7 bg-accent-gold text-dark-bg rounded-full text-xs font-bold flex items-center justify-center">
+                  1
                 </div>
-
-                <h3 className="font-serif text-2xl font-semibold mb-4 text-center tracking-wide">
-                  Learn About Radon
-                </h3>
-                <p className="text-text-secondary text-center leading-relaxed text-sm tracking-wide">
-                  Interactive lessons guide you through radon science, from
-                  uranium decay chains to health impacts. Each lesson unlocks
-                  new features of our prediction system.
-                </p>
               </div>
-            </div>
+
+              <h3 className="font-serif text-2xl font-semibold mb-4 text-center tracking-wide">
+                Learn About Radon
+              </h3>
+              <p className="text-text-secondary text-center leading-relaxed text-sm tracking-wide">
+                Interactive lessons guide you through radon science, from
+                uranium decay chains to health impacts. Each lesson unlocks new
+                features of our prediction system.
+              </p>
+            </Card>
 
             {/* Step 2 */}
-            <div className="bg-dark-card border border-subtle rounded-2xl p-12 relative overflow-hidden group hover:bg-dark-card-hover hover:-translate-y-2 transition-all duration-400 hover:border-accent-gold/30 animate-[slideUp_0.6s_ease-out_0.2s_backwards]">
-              <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-b from-accent-gold/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-400 pointer-events-none"></div>
-
-              <div className="relative">
-                <div className="w-[70px] h-[70px] mx-auto mb-8 flex items-center justify-center bg-accent-gold/10 border border-accent-gold/20 rounded-[18px] relative">
-                  <svg
-                    className="w-9 h-9 stroke-accent-gold fill-none"
-                    strokeWidth="1.5"
-                    viewBox="0 0 24 24"
-                  >
-                    <circle cx="12" cy="12" r="10" />
-                    <circle cx="12" cy="12" r="6" />
-                    <circle cx="12" cy="12" r="2" />
-                  </svg>
-                  <div className="absolute -top-2.5 -right-2.5 w-7 h-7 bg-accent-gold text-dark-bg rounded-full text-xs font-bold flex items-center justify-center">
-                    2
-                  </div>
+            <Card delay={0.2}>
+              <div className="w-[70px] h-[70px] mx-auto mb-8 flex items-center justify-center bg-accent-gold/10 border border-accent-gold/20 rounded-[18px] relative">
+                <svg
+                  className="w-9 h-9 stroke-accent-gold fill-none"
+                  strokeWidth="1.5"
+                  viewBox="0 0 24 24"
+                >
+                  <circle cx="12" cy="12" r="10" />
+                  <circle cx="12" cy="12" r="6" />
+                  <circle cx="12" cy="12" r="2" />
+                </svg>
+                <div className="absolute -top-2.5 -right-2.5 w-7 h-7 bg-accent-gold text-dark-bg rounded-full text-xs font-bold flex items-center justify-center">
+                  2
                 </div>
-
-                <h3 className="font-serif text-2xl font-semibold mb-4 text-center tracking-wide">
-                  AI Prediction
-                </h3>
-                <p className="text-text-secondary text-center leading-relaxed text-sm tracking-wide">
-                  Our neural network analyzes your home&apos;s
-                  characteristics—region, geology, building age, foundation
-                  type—to predict radon levels with precision.
-                </p>
               </div>
-            </div>
+
+              <h3 className="font-serif text-2xl font-semibold mb-4 text-center tracking-wide">
+                AI Prediction
+              </h3>
+              <p className="text-text-secondary text-center leading-relaxed text-sm tracking-wide">
+                Our neural network analyzes your home&apos;s
+                characteristics—region, geology, building age, foundation
+                type—to predict radon levels with precision.
+              </p>
+            </Card>
 
             {/* Step 3 */}
-            <div className="bg-dark-card border border-subtle rounded-2xl p-12 relative overflow-hidden group hover:bg-dark-card-hover hover:-translate-y-2 transition-all duration-400 hover:border-accent-gold/30 animate-[slideUp_0.6s_ease-out_0.3s_backwards]">
-              <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-b from-accent-gold/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-400 pointer-events-none"></div>
-
-              <div className="relative">
-                <div className="w-[70px] h-[70px] mx-auto mb-8 flex items-center justify-center bg-accent-gold/10 border border-accent-gold/20 rounded-[18px] relative">
-                  <svg
-                    className="w-9 h-9 stroke-accent-gold fill-none"
-                    strokeWidth="1.5"
-                    viewBox="0 0 24 24"
-                  >
-                    <path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-                  </svg>
-                  <div className="absolute -top-2.5 -right-2.5 w-7 h-7 bg-accent-gold text-dark-bg rounded-full text-xs font-bold flex items-center justify-center">
-                    3
-                  </div>
+            <Card delay={0.3}>
+              <div className="w-[70px] h-[70px] mx-auto mb-8 flex items-center justify-center bg-accent-gold/10 border border-accent-gold/20 rounded-[18px] relative">
+                <svg
+                  className="w-9 h-9 stroke-accent-gold fill-none"
+                  strokeWidth="1.5"
+                  viewBox="0 0 24 24"
+                >
+                  <path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                </svg>
+                <div className="absolute -top-2.5 -right-2.5 w-7 h-7 bg-accent-gold text-dark-bg rounded-full text-xs font-bold flex items-center justify-center">
+                  3
                 </div>
-
-                <h3 className="font-serif text-2xl font-semibold mb-4 text-center tracking-wide">
-                  Visualize & Act
-                </h3>
-                <p className="text-text-secondary text-center leading-relaxed text-sm tracking-wide">
-                  See radon particles rising through your home in 3D. Get
-                  personalized recommendations and compare your risk to regional
-                  data from Health Canada.
-                </p>
               </div>
-            </div>
+
+              <h3 className="font-serif text-2xl font-semibold mb-4 text-center tracking-wide">
+                Visualize & Act
+              </h3>
+              <p className="text-text-secondary text-center leading-relaxed text-sm tracking-wide">
+                See radon particles rising through your home in 3D. Get
+                personalized recommendations and compare your risk to regional
+                data from Health Canada.
+              </p>
+            </Card>
           </div>
         </section>
 
