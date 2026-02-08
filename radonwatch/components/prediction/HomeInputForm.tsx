@@ -5,9 +5,13 @@ import { HomeData } from "@/lib/radonModel";
 
 interface HomeInputFormProps {
   onSubmit: (data: HomeData) => void;
+  onRegionChange?: (region: string) => void;
 }
 
-export default function HomeInputForm({ onSubmit }: HomeInputFormProps) {
+export default function HomeInputForm({
+  onSubmit,
+  onRegionChange,
+}: HomeInputFormProps) {
   const [formData, setFormData] = useState<HomeData>({
     region: "",
     age: "",
@@ -25,6 +29,11 @@ export default function HomeInputForm({ onSubmit }: HomeInputFormProps) {
 
   const handleChange = (field: keyof HomeData, value: string) => {
     setFormData((prev) => ({ ...prev, [field]: value }));
+
+    // Notify parent when region changes
+    if (field === "region" && onRegionChange) {
+      onRegionChange(value);
+    }
   };
 
   const isFormValid = Object.values(formData).every((value) => value !== "");
@@ -32,21 +41,21 @@ export default function HomeInputForm({ onSubmit }: HomeInputFormProps) {
   return (
     <form
       onSubmit={handleSubmit}
-      className="bg-dark-card border border-subtle p-8 rounded-lg max-w-2xl mx-auto"
+      className="bg-dark-card border border-subtle p-6 rounded-lg h-full overflow-y-auto"
     >
-      <h2 className="text-3xl font-bold mb-6 text-text-primary font-serif">
+      <h2 className="text-2xl font-bold mb-4 text-text-primary font-serif">
         Enter Your Home Details
       </h2>
 
       {/* Region */}
-      <div className="mb-6">
-        <label className="block text-sm font-semibold mb-2 text-gray-700 dark:text-gray-300">
+      <div className="mb-4">
+        <label className="block text-sm font-semibold mb-1.5 text-gray-700 dark:text-gray-300">
           Geographic Region
         </label>
         <select
           value={formData.region}
           onChange={(e) => handleChange("region", e.target.value)}
-          className="w-full p-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-white"
+          className="w-full p-2.5 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-white text-sm"
           required
         >
           <option value="">Select your region...</option>
@@ -71,14 +80,14 @@ export default function HomeInputForm({ onSubmit }: HomeInputFormProps) {
       </div>
 
       {/* Building Age */}
-      <div className="mb-6">
-        <label className="block text-sm font-semibold mb-2 text-gray-700 dark:text-gray-300">
+      <div className="mb-4">
+        <label className="block text-sm font-semibold mb-1.5 text-gray-700 dark:text-gray-300">
           Building Age
         </label>
         <select
           value={formData.age}
           onChange={(e) => handleChange("age", e.target.value)}
-          className="w-full p-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-white"
+          className="w-full p-2.5 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-white text-sm"
           required
         >
           <option value="">Select building age...</option>
@@ -91,14 +100,14 @@ export default function HomeInputForm({ onSubmit }: HomeInputFormProps) {
       </div>
 
       {/* Foundation Type */}
-      <div className="mb-6">
-        <label className="block text-sm font-semibold mb-2 text-gray-700 dark:text-gray-300">
+      <div className="mb-4">
+        <label className="block text-sm font-semibold mb-1.5 text-gray-700 dark:text-gray-300">
           Foundation Type
         </label>
         <select
           value={formData.foundation}
           onChange={(e) => handleChange("foundation", e.target.value)}
-          className="w-full p-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-white"
+          className="w-full p-2.5 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-white text-sm"
           required
         >
           <option value="">Select foundation type...</option>
@@ -110,14 +119,14 @@ export default function HomeInputForm({ onSubmit }: HomeInputFormProps) {
       </div>
 
       {/* Soil Type */}
-      <div className="mb-6">
-        <label className="block text-sm font-semibold mb-2 text-gray-700 dark:text-gray-300">
+      <div className="mb-4">
+        <label className="block text-sm font-semibold mb-1.5 text-gray-700 dark:text-gray-300">
           Soil/Bedrock Type (if known)
         </label>
         <select
           value={formData.soilType}
           onChange={(e) => handleChange("soilType", e.target.value)}
-          className="w-full p-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-white"
+          className="w-full p-2.5 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-white text-sm"
           required
         >
           <option value="">Select soil type...</option>
@@ -132,14 +141,14 @@ export default function HomeInputForm({ onSubmit }: HomeInputFormProps) {
       </div>
 
       {/* Building Size */}
-      <div className="mb-6">
-        <label className="block text-sm font-semibold mb-2 text-gray-700 dark:text-gray-300">
+      <div className="mb-4">
+        <label className="block text-sm font-semibold mb-1.5 text-gray-700 dark:text-gray-300">
           Building Size
         </label>
         <select
           value={formData.size}
           onChange={(e) => handleChange("size", e.target.value)}
-          className="w-full p-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-white"
+          className="w-full p-2.5 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-white text-sm"
           required
         >
           <option value="">Select building size...</option>
@@ -151,14 +160,14 @@ export default function HomeInputForm({ onSubmit }: HomeInputFormProps) {
       </div>
 
       {/* Floor Level */}
-      <div className="mb-6">
-        <label className="block text-sm font-semibold mb-2 text-gray-700 dark:text-gray-300">
+      <div className="mb-4">
+        <label className="block text-sm font-semibold mb-1.5 text-gray-700 dark:text-gray-300">
           Primary Living Floor
         </label>
         <select
           value={formData.floor}
           onChange={(e) => handleChange("floor", e.target.value)}
-          className="w-full p-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-white"
+          className="w-full p-2.5 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-white text-sm"
           required
         >
           <option value="">Select floor level...</option>
@@ -169,14 +178,14 @@ export default function HomeInputForm({ onSubmit }: HomeInputFormProps) {
       </div>
 
       {/* Ventilation */}
-      <div className="mb-6">
-        <label className="block text-sm font-semibold mb-2 text-gray-700 dark:text-gray-300">
+      <div className="mb-4">
+        <label className="block text-sm font-semibold mb-1.5 text-gray-700 dark:text-gray-300">
           Ventilation Quality
         </label>
         <select
           value={formData.ventilation}
           onChange={(e) => handleChange("ventilation", e.target.value)}
-          className="w-full p-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-white"
+          className="w-full p-2.5 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-white text-sm"
           required
         >
           <option value="">Select ventilation quality...</option>
@@ -190,7 +199,7 @@ export default function HomeInputForm({ onSubmit }: HomeInputFormProps) {
       <button
         type="submit"
         disabled={!isFormValid}
-        className={`w-full py-4 rounded-lg font-bold text-lg transition-all ${
+        className={`w-full py-3 rounded-lg font-bold transition-all ${
           isFormValid
             ? "bg-accent-gold hover:bg-accent-gold/90 text-dark-bg shadow-lg hover:shadow-glow-gold"
             : "bg-dark-card-hover border border-subtle text-text-secondary cursor-not-allowed"

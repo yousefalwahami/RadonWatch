@@ -7,6 +7,7 @@ import dynamic from "next/dynamic";
 import HomeInputForm from "@/components/prediction/HomeInputForm";
 import MLTrainingAnimation from "@/components/prediction/MLTrainingAnimation";
 import PredictionResultDisplay from "@/components/prediction/PredictionResult";
+import InteractiveProvinceMap from "@/components/prediction/InteractiveProvinceMap";
 import {
   calculateRadonRisk,
   getRegionalAverage,
@@ -26,10 +27,15 @@ export default function PredictPage() {
   const [isTraining, setIsTraining] = useState(false);
   const [prediction, setPrediction] = useState<PredictionResult | null>(null);
   const [regionalAverage, setRegionalAverage] = useState(0);
+  const [selectedRegion, setSelectedRegion] = useState<string>("");
 
   const handleFormSubmit = (data: HomeData) => {
     setHomeData(data);
     setIsTraining(true);
+  };
+
+  const handleRegionChange = (region: string) => {
+    setSelectedRegion(region);
   };
 
   const handleTrainingComplete = () => {
@@ -56,10 +62,10 @@ export default function PredictPage() {
   };
 
   return (
-    <div className="min-h-screen bg-dark-bg py-12">
-      <div className="container mx-auto px-4 max-w-6xl">
+    <div className="min-h-screen bg-dark-bg py-6">
+      <div className="container mx-auto px-4 max-w-7xl">
         {/* Header */}
-        <div className="mb-8">
+        <div className="mb-6">
           <Link
             href="/"
             className="text-accent-gold hover:text-text-primary font-semibold mb-4 inline-block transition-colors"
@@ -74,54 +80,81 @@ export default function PredictPage() {
           </p>
         </div>
 
-        {/* Input Form (shown when no prediction yet) */}
-        {!prediction && !isTraining && (
-          <HomeInputForm onSubmit={handleFormSubmit} />
-        )}
-
-        {/* ML Training Animation */}
+        {/* ML Training Animation (full width) */}
         {isTraining && (
           <MLTrainingAnimation onComplete={handleTrainingComplete} />
         )}
 
-        {/* Results */}
-        {prediction && !isTraining && (
-          <div className="space-y-8">
-            {/* Prediction Result */}
-            <PredictionResultDisplay
-              result={prediction}
-              regionalAverage={regionalAverage}
-            />
+        {/* Split View: Form + Map OR Results + 3D House */}
+        {!isTraining && (
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 min-h-[600px]">
+            {/* LEFT SIDE */}
+            <div className="flex flex-col">
+              {!prediction ? (
+                // Form View
+                <HomeInputForm
+                  onSubmit={handleFormSubmit}
+                  onRegionChange={handleRegionChange}
+                />
+              ) : (
+                // Results View (Scrollable)
+                <div className="bg-dark-card border border-subtle rounded-lg overflow-hidden flex flex-col h-full">
+                  <div className="p-6 border-b border-subtle">
+                    <h2 className="text-2xl font-bold text-text-primary font-serif">
+                      Risk Assessment Results
+                    </h2>
+                  </div>
+                  <div className="flex-1 overflow-y-auto p-6 space-y-6">
+                    <PredictionResultDisplay
+                      result={prediction}
+                      regionalAverage={regionalAverage}
+                    />
 
-            {/* 3D Visualization */}
-            <div>
-              <h2 className="text-2xl font-bold mb-4 text-text-primary font-serif">
-                3D Radon Visualization
-              </h2>
-              <p className="text-text-secondary mb-4">
-                See how radon flows through your home. Try adjusting the
-                controls!
-              </p>
-              <HouseVisualization radonLevel={prediction.radonLevel} />
+                    {/* Action Buttons */}
+                    <div className="flex flex-col gap-4">
+                      <button
+                        onClick={() => {
+                          setPrediction(null);
+                          setHomeData(null);
+                          setSelectedRegion("");
+                        }}
+                        className="bg-dark-card-hover hover:bg-accent-gold hover:text-dark-bg border border-subtle text-text-primary px-6 py-3 rounded-lg font-bold transition-all"
+                      >
+                        ← Test Another Home
+                      </button>
+                      <button
+                        onClick={handleViewDashboard}
+                        className="bg-primary-600 hover:bg-primary-700 text-white px-6 py-3 rounded-lg font-bold transition-all"
+                      >
+                        View Full Dashboard →
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              )}
             </div>
 
-            {/* Action Buttons */}
-            <div className="flex flex-col md:flex-row gap-4 justify-center">
-              <button
-                onClick={() => {
-                  setPrediction(null);
-                  setHomeData(null);
-                }}
-                className="bg-dark-card-hover hover:bg-accent-gold hover:text-dark-bg border border-subtle text-text-primary px-8 py-4 rounded-lg font-bold text-lg transition-all"
-              >
-                ← Test Another Home
-              </button>
-              <button
-                onClick={handleViewDashboard}
-                className="bg-primary-600 hover:bg-primary-700 text-white px-8 py-4 rounded-lg font-bold text-lg transition-all"
-              >
-                View Full Dashboard →
-              </button>
+            {/* RIGHT SIDE */}
+            <div className="flex flex-col">
+              {!prediction ? (
+                // Interactive Map View
+                <InteractiveProvinceMap selectedRegion={selectedRegion} />
+              ) : (
+                // 3D House Visualization
+                <div className="bg-dark-card border border-subtle p-6 rounded-lg h-full flex flex-col">
+                  <div className="mb-4">
+                    <h2 className="text-2xl font-bold text-text-primary font-serif mb-2">
+                      3D Radon Visualization
+                    </h2>
+                    <p className="text-text-secondary text-sm">
+                      Interactive 3D model showing radon flow through your home
+                    </p>
+                  </div>
+                  <div className="flex-1">
+                    <HouseVisualization radonLevel={prediction.radonLevel} />
+                  </div>
+                </div>
+              )}
             </div>
           </div>
         )}
