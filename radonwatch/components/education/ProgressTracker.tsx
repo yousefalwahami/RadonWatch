@@ -31,7 +31,7 @@ export default function ProgressTracker({
         </div>
         <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-3">
           <motion.div
-            className="bg-radon-500 h-3 rounded-full"
+            className="bg-primary-500 h-3 rounded-full"
             initial={{ width: 0 }}
             animate={{ width: `${progress}%` }}
             transition={{ duration: 0.5 }}
@@ -53,7 +53,7 @@ export default function ProgressTracker({
                 isCompleted
                   ? "bg-green-100 dark:bg-green-900 text-green-700 dark:text-green-300"
                   : isCurrent
-                    ? "bg-radon-100 dark:bg-radon-900 text-radon-700 dark:text-radon-300"
+                    ? "bg-primary-100 dark:bg-primary-900 text-primary-700 dark:text-primary-300"
                     : "bg-gray-100 dark:bg-gray-800 text-gray-400"
               }`}
             >
@@ -83,7 +83,7 @@ export default function ProgressTracker({
             {stages.slice(0, currentStage).map((stage) => (
               <span
                 key={stage.id}
-                className="bg-radon-100 dark:bg-radon-900 text-radon-700 dark:text-radon-300 px-3 py-1 rounded-full text-xs font-medium"
+                className="bg-primary-100 dark:bg-primary-900 text-primary-700 dark:text-primary-300 px-3 py-1 rounded-full text-xs font-medium"
               >
                 {stage.unlocks}
               </span>

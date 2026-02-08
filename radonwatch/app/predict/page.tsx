@@ -62,7 +62,7 @@ export default function PredictPage() {
         <div className="mb-8">
           <Link
             href="/"
-            className="text-radon-600 hover:text-radon-700 font-semibold mb-4 inline-block"
+            className="text-primary-600 hover:text-primary-700 font-semibold mb-4 inline-block"
           >
             ← Back to Home
           </Link>
@@ -118,7 +118,7 @@ export default function PredictPage() {
               </button>
               <button
                 onClick={handleViewDashboard}
-                className="bg-radon-600 hover:bg-radon-700 text-white px-8 py-4 rounded-lg font-bold text-lg transition-all"
+                className="bg-primary-600 hover:bg-primary-700 text-white px-8 py-4 rounded-lg font-bold text-lg transition-all"
               >
                 View Full Dashboard →
               </button>

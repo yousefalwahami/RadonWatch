@@ -44,10 +44,10 @@ export default function Lesson({
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5 }}
-      className="bg-white dark:bg-gray-900 p-6 rounded-lg shadow-lg border-2 border-radon-400"
+      className="bg-white dark:bg-gray-900 p-6 rounded-lg shadow-lg border-2 border-primary-400"
     >
       <div className="flex items-center gap-3 mb-4">
-        <div className="w-10 h-10 bg-radon-500 rounded-full flex items-center justify-center">
+        <div className="w-10 h-10 bg-primary-500 rounded-full flex items-center justify-center">
           <span className="text-white font-bold">{lessonNumber}</span>
         </div>
         <h2 className="text-2xl font-bold text-gray-900 dark:text-white">
@@ -60,7 +60,7 @@ export default function Lesson({
       {!isCompleted && (
         <button
           onClick={handleComplete}
-          className="bg-radon-500 hover:bg-radon-600 text-white px-6 py-3 rounded-lg font-semibold transition-colors"
+          className="bg-primary-500 hover:bg-primary-600 text-white px-6 py-3 rounded-lg font-semibold transition-colors"
         >
           Complete Lesson →
         </button>

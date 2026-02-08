@@ -42,7 +42,7 @@ export default function UraniumDecayChain() {
     },
     {
       element: "Rn-222",
-      name: "Radon-222 ☢️",
+      name: "primary-222 ☢️",
       halfLife: "3.8 days",
       color: "bg-red-500",
       highlight: true,
@@ -83,7 +83,7 @@ export default function UraniumDecayChain() {
         ))}
       </div>
       <p className="text-center mt-6 text-gray-600 dark:text-gray-400 text-sm">
-        Radon-222 is a radioactive gas that escapes from soil and enters homes
+        primary-222 is a radioactive gas that escapes from soil and enters homes
         through cracks and openings.
       </p>
     </div>

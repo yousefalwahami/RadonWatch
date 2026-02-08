@@ -214,7 +214,7 @@ export default function HouseVisualization({
             <label className="text-white text-sm font-semibold">
               Air Pressure Differential
             </label>
-            <span className="text-radon-400 text-sm">
+            <span className="text-primary-400 text-sm">
               {airPressure.toFixed(1)}x
             </span>
           </div>

@@ -2,128 +2,163 @@ import Link from "next/link";
 
 export default function Home() {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-radon-900 via-radon-700 to-radon-500">
-      <main className="container mx-auto px-4 py-16">
+    <div className="relative z-10">
+      <div className="mx-auto px-6 lg:px-16 py-10">
+        {/* Header */}
+        <header className="flex justify-between items-center mb-20 py-5">
+          <div className="font-serif text-3xl font-semibold tracking-wide bg-gradient-to-br from-accent-gold to-accent-blue bg-clip-text text-transparent">
+            RadonVision
+          </div>
+          <nav className="flex gap-10 items-center">
+            <Link
+              href="/"
+              className="text-text-secondary hover:text-text-primary text-sm font-medium tracking-wide transition-colors relative group"
+            >
+              Home
+              <span className="absolute bottom-[-5px] left-0 w-0 h-[1px] bg-accent-gold transition-all duration-300 group-hover:w-full"></span>
+            </Link>
+            <Link
+              href="/learn"
+              className="text-text-secondary hover:text-text-primary text-sm font-medium tracking-wide transition-colors relative group"
+            >
+              Learn
+              <span className="absolute bottom-[-5px] left-0 w-0 h-[1px] bg-accent-gold transition-all duration-300 group-hover:w-full"></span>
+            </Link>
+            <Link
+              href="/predict"
+              className="bg-gradient-to-r from-accent-gold to-[#c49563] text-dark-bg px-7 py-3 rounded-full font-semibold text-sm hover:shadow-glow-gold hover:-translate-y-0.5 transition-all duration-200 tracking-wide"
+            >
+              Analyze Your Home
+            </Link>
+          </nav>
+        </header>
+
         {/* Hero Section */}
-        <div className="text-center text-white mb-16">
-          <h1 className="text-6xl font-bold mb-6">RadonVision 🔬</h1>
-          <p className="text-2xl mb-4 opacity-90">
-            An Over-Engineered Educational Platform for Radon Awareness
+        <section className="text-center mb-24 animate-[fadeIn_1s_ease-out]">
+          <h1 className="font-serif text-7xl font-light mb-5 tracking-wide leading-tight">
+            Predictive Radon
+            <br />
+            Analysis
+          </h1>
+          <p className="text-lg text-text-secondary max-w-2xl mx-auto tracking-wide">
+            Understand your home&apos;s radon risk through AI-powered prediction
+            and interactive education.
           </p>
-          <p className="text-lg max-w-3xl mx-auto opacity-75">
-            Learn about radon through an interactive ML prediction system.
-            Discover how machine learning analyzes geological and building
-            factors to predict radon levels in Canadian homes.
-          </p>
-        </div>
+        </section>
 
-        {/* Key Stats */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-16">
-          <div className="bg-white dark:bg-gray-900 p-8 rounded-lg shadow-xl text-center">
-            <div className="text-5xl mb-3">☢️</div>
-            <div className="text-3xl font-bold text-radon-600 mb-2">16%</div>
-            <p className="text-gray-600 dark:text-gray-400">
-              of Canadian homes have high radon levels
-            </p>
-          </div>
-          <div className="bg-white dark:bg-gray-900 p-8 rounded-lg shadow-xl text-center">
-            <div className="text-5xl mb-3">🫁</div>
-            <div className="text-3xl font-bold text-radon-600 mb-2">#1</div>
-            <p className="text-gray-600 dark:text-gray-400">
-              cause of lung cancer in non-smokers
-            </p>
-          </div>
-          <div className="bg-white dark:bg-gray-900 p-8 rounded-lg shadow-xl text-center">
-            <div className="text-5xl mb-3">🧠</div>
-            <div className="text-3xl font-bold text-radon-600 mb-2">AI</div>
-            <p className="text-gray-600 dark:text-gray-400">
-              powered prediction using 7 risk factors
-            </p>
-          </div>
-        </div>
-
-        {/* What You'll Learn */}
-        <div className="bg-white dark:bg-gray-900 p-8 rounded-lg shadow-xl mb-12">
-          <h2 className="text-3xl font-bold mb-6 text-gray-900 dark:text-white text-center">
-            What You'll Learn
+        {/* How It Works Section */}
+        <section className="mb-16">
+          <h2 className="text-center font-serif text-5xl font-normal mb-4 tracking-wide">
+            How It Works
           </h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <div className="flex gap-4">
-              <div className="text-3xl">📚</div>
-              <div>
-                <h3 className="font-bold text-gray-900 dark:text-white mb-2">
-                  Interactive Education
+          <p className="text-center text-text-secondary mb-16 tracking-wide">
+            Three steps to understanding your radon risk.
+          </p>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {/* Step 1 */}
+            <div className="bg-dark-card border border-subtle rounded-2xl p-12 relative overflow-hidden group hover:bg-dark-card-hover hover:-translate-y-2 transition-all duration-400 hover:border-accent-gold/30 animate-[slideUp_0.6s_ease-out_0.1s_backwards]">
+              <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-b from-accent-gold/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-400 pointer-events-none"></div>
+
+              <div className="relative">
+                <div className="w-[70px] h-[70px] mx-auto mb-8 flex items-center justify-center bg-accent-gold/10 border border-accent-gold/20 rounded-[18px] relative">
+                  <svg
+                    className="w-9 h-9 stroke-accent-gold fill-none"
+                    strokeWidth="1.5"
+                    viewBox="0 0 24 24"
+                  >
+                    <path d="M12 2L2 7l10 5 10-5-10-5z" />
+                    <path d="M2 17l10 5 10-5M2 12l10 5 10-5" />
+                  </svg>
+                  <div className="absolute -top-2.5 -right-2.5 w-7 h-7 bg-accent-gold text-dark-bg rounded-full text-xs font-bold flex items-center justify-center">
+                    1
+                  </div>
+                </div>
+
+                <h3 className="font-serif text-2xl font-semibold mb-4 text-center tracking-wide">
+                  Learn About Radon
                 </h3>
-                <p className="text-gray-600 dark:text-gray-400 text-sm">
-                  Progressive lessons on radon science, from uranium decay to
-                  mitigation strategies
+                <p className="text-text-secondary text-center leading-relaxed text-sm tracking-wide">
+                  Interactive lessons guide you through radon science, from
+                  uranium decay chains to health impacts. Each lesson unlocks
+                  new features of our prediction system.
                 </p>
               </div>
             </div>
-            <div className="flex gap-4">
-              <div className="text-3xl">🤖</div>
-              <div>
-                <h3 className="font-bold text-gray-900 dark:text-white mb-2">
-                  ML Prediction System
+
+            {/* Step 2 */}
+            <div className="bg-dark-card border border-subtle rounded-2xl p-12 relative overflow-hidden group hover:bg-dark-card-hover hover:-translate-y-2 transition-all duration-400 hover:border-accent-gold/30 animate-[slideUp_0.6s_ease-out_0.2s_backwards]">
+              <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-b from-accent-gold/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-400 pointer-events-none"></div>
+
+              <div className="relative">
+                <div className="w-[70px] h-[70px] mx-auto mb-8 flex items-center justify-center bg-accent-gold/10 border border-accent-gold/20 rounded-[18px] relative">
+                  <svg
+                    className="w-9 h-9 stroke-accent-gold fill-none"
+                    strokeWidth="1.5"
+                    viewBox="0 0 24 24"
+                  >
+                    <circle cx="12" cy="12" r="10" />
+                    <circle cx="12" cy="12" r="6" />
+                    <circle cx="12" cy="12" r="2" />
+                  </svg>
+                  <div className="absolute -top-2.5 -right-2.5 w-7 h-7 bg-accent-gold text-dark-bg rounded-full text-xs font-bold flex items-center justify-center">
+                    2
+                  </div>
+                </div>
+
+                <h3 className="font-serif text-2xl font-semibold mb-4 text-center tracking-wide">
+                  AI Prediction
                 </h3>
-                <p className="text-gray-600 dark:text-gray-400 text-sm">
-                  Watch a neural network analyze your home's characteristics in
-                  real-time
+                <p className="text-text-secondary text-center leading-relaxed text-sm tracking-wide">
+                  Our neural network analyzes your home&apos;s
+                  characteristics—region, geology, building age, foundation
+                  type—to predict radon levels with precision.
                 </p>
               </div>
             </div>
-            <div className="flex gap-4">
-              <div className="text-3xl">🎨</div>
-              <div>
-                <h3 className="font-bold text-gray-900 dark:text-white mb-2">
-                  3D Visualization
+
+            {/* Step 3 */}
+            <div className="bg-dark-card border border-subtle rounded-2xl p-12 relative overflow-hidden group hover:bg-dark-card-hover hover:-translate-y-2 transition-all duration-400 hover:border-accent-gold/30 animate-[slideUp_0.6s_ease-out_0.3s_backwards]">
+              <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-b from-accent-gold/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-400 pointer-events-none"></div>
+
+              <div className="relative">
+                <div className="w-[70px] h-[70px] mx-auto mb-8 flex items-center justify-center bg-accent-gold/10 border border-accent-gold/20 rounded-[18px] relative">
+                  <svg
+                    className="w-9 h-9 stroke-accent-gold fill-none"
+                    strokeWidth="1.5"
+                    viewBox="0 0 24 24"
+                  >
+                    <path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                  </svg>
+                  <div className="absolute -top-2.5 -right-2.5 w-7 h-7 bg-accent-gold text-dark-bg rounded-full text-xs font-bold flex items-center justify-center">
+                    3
+                  </div>
+                </div>
+
+                <h3 className="font-serif text-2xl font-semibold mb-4 text-center tracking-wide">
+                  Visualize & Act
                 </h3>
-                <p className="text-gray-600 dark:text-gray-400 text-sm">
-                  See radon particles flowing through a cross-section of your
-                  home
-                </p>
-              </div>
-            </div>
-            <div className="flex gap-4">
-              <div className="text-3xl">🗺️</div>
-              <div>
-                <h3 className="font-bold text-gray-900 dark:text-white mb-2">
-                  Real Canadian Data
-                </h3>
-                <p className="text-gray-600 dark:text-gray-400 text-sm">
-                  Explore Health Canada's radon measurements across provinces
+                <p className="text-text-secondary text-center leading-relaxed text-sm tracking-wide">
+                  See radon particles rising through your home in 3D. Get
+                  personalized recommendations and compare your risk to regional
+                  data from Health Canada.
                 </p>
               </div>
             </div>
           </div>
-        </div>
+        </section>
 
-        {/* CTA Buttons */}
-        <div className="flex flex-col md:flex-row gap-4 justify-center items-center">
-          <Link
-            href="/learn"
-            className="bg-white hover:bg-gray-100 text-radon-700 px-8 py-4 rounded-lg font-bold text-lg shadow-lg transition-all hover:shadow-xl"
-          >
-            Start Learning 📚
-          </Link>
-          <Link
-            href="/predict"
-            className="bg-radon-800 hover:bg-radon-900 text-white px-8 py-4 rounded-lg font-bold text-lg shadow-lg transition-all hover:shadow-xl"
-          >
-            Try the Prediction Tool 🔬
-          </Link>
-        </div>
+        {/* Divider */}
+        <div className="h-px bg-gradient-to-r from-transparent via-subtle to-transparent my-20"></div>
 
-        {/* Disclaimer */}
-        <div className="mt-16 text-center text-white text-sm opacity-75 max-w-2xl mx-auto">
+        {/* Footer */}
+        <footer className="text-center py-10 text-text-secondary text-xs border-t border-subtle mt-20">
           <p>
-            ⚠️ This is an educational tool demonstrating ML concepts.
-            Predictions are based on heuristic models, not trained neural
-            networks. Always test your actual home with a certified radon test
-            kit.
+            RadonVision © 2026 · Built for health education · Data from Health
+            Canada
           </p>
-        </div>
-      </main>
+        </footer>
+      </div>
     </div>
   );
 }

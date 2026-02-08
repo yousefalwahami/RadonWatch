@@ -108,7 +108,7 @@ export default function PredictionResultDisplay({
             <div className="text-sm text-gray-600 dark:text-gray-400 mb-1">
               Your Home
             </div>
-            <div className="text-3xl font-bold text-radon-600">
+            <div className="text-3xl font-bold text-primary-600">
               {result.radonLevel}
             </div>
             <div className="text-xs text-gray-500">Bq/m³</div>

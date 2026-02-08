@@ -60,11 +60,11 @@ export default function RiskDashboard({ result }: RiskDashboardProps) {
         <p className="text-gray-700 dark:text-gray-300 mb-4">
           {healthImpact.description}
         </p>
-        <div className="bg-radon-100 dark:bg-radon-900 border-l-4 border-radon-500 p-4 rounded">
-          <p className="text-sm font-semibold text-radon-700 dark:text-radon-300">
+        <div className="bg-primary-100 dark:bg-primary-900 border-l-4 border-primary-500 p-4 rounded">
+          <p className="text-sm font-semibold text-primary-700 dark:text-primary-300">
             📋 Recommended Action:
           </p>
-          <p className="text-sm text-radon-600 dark:text-radon-400 mt-1">
+          <p className="text-sm text-primary-600 dark:text-primary-400 mt-1">
             {healthImpact.recommendation}
           </p>
         </div>
@@ -92,7 +92,7 @@ export default function RiskDashboard({ result }: RiskDashboardProps) {
             3.8 days
           </div>
           <div className="text-sm text-gray-600 dark:text-gray-400">
-            Radon-222 half-life
+            primary-222 half-life
           </div>
         </div>
 
@@ -119,7 +119,7 @@ export default function RiskDashboard({ result }: RiskDashboardProps) {
           {relevantMitigation.map((strategy, index) => (
             <div
               key={index}
-              className="border border-gray-200 dark:border-gray-700 rounded-lg p-4 hover:border-radon-500 transition-colors"
+              className="border border-gray-200 dark:border-gray-700 rounded-lg p-4 hover:border-primary-500 transition-colors"
             >
               <div className="flex justify-between items-start mb-2">
                 <h4 className="font-bold text-gray-900 dark:text-white">
@@ -145,7 +145,7 @@ export default function RiskDashboard({ result }: RiskDashboardProps) {
       </div>
 
       {/* Next Steps */}
-      <div className="bg-gradient-to-r from-radon-500 to-radon-700 p-6 rounded-lg shadow-lg text-white">
+      <div className="bg-gradient-to-r from-primary-500 to-primary-700 p-6 rounded-lg shadow-lg text-white">
         <h3 className="text-2xl font-bold mb-4">Next Steps</h3>
         <ol className="space-y-3">
           <li className="flex gap-3">
@@ -177,7 +177,7 @@ export default function RiskDashboard({ result }: RiskDashboardProps) {
           </li>
         </ol>
 
-        <div className="mt-6 pt-6 border-t border-radon-400">
+        <div className="mt-6 pt-6 border-t border-primary-400">
           <p className="text-sm opacity-90">
             <strong>⚠️ Important:</strong> This is an educational prediction
             tool. Actual radon levels can only be determined through proper

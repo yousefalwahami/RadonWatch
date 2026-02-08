@@ -11,18 +11,30 @@ export default {
       colors: {
         background: "var(--background)",
         foreground: "var(--foreground)",
-        radon: {
-          50: '#f5f3ff',
-          100: '#ede9fe',
-          200: '#ddd6fe',
-          300: '#c4b5fd',
-          400: '#a78bfa',
-          500: '#8b5cf6',
-          600: '#7c3aed',
-          700: '#6d28d9',
-          800: '#5b21b6',
-          900: '#4c1d95',
+        dark: {
+          bg: "#0f1419",
+          card: "#1a2332",
+          "card-hover": "#222d3f",
         },
+        accent: {
+          gold: "#d4a574",
+          blue: "#4a9eff",
+        },
+        text: {
+          primary: "#e8edf4",
+          secondary: "#8b95a8",
+        },
+      },
+      fontFamily: {
+        serif: ["Cormorant Garamond", "serif"],
+        sans: ["DM Sans", "sans-serif"],
+      },
+      borderColor: {
+        subtle: "rgba(255, 255, 255, 0.08)",
+      },
+      boxShadow: {
+        "glow-gold": "0 10px 30px rgba(212, 165, 116, 0.15)",
+        "glow-blue": "0 10px 30px rgba(74, 158, 255, 0.15)",
       },
     },
   },

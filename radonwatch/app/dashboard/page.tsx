@@ -31,13 +31,15 @@ export default function DashboardPage() {
     const storedHomeData = sessionStorage.getItem("homeData");
 
     if (storedPrediction && storedRegionalAvg) {
-      // Batch state update to avoid multiple re-renders
-      setState({
-        prediction: JSON.parse(storedPrediction),
-        regionalAverage: parseInt(storedRegionalAvg),
-        homeData: storedHomeData ? JSON.parse(storedHomeData) : null,
-        isLoaded: true,
-      });
+      // Use setTimeout to avoid synchronous setState in effect
+      setTimeout(() => {
+        setState({
+          prediction: JSON.parse(storedPrediction),
+          regionalAverage: parseInt(storedRegionalAvg),
+          homeData: storedHomeData ? JSON.parse(storedHomeData) : null,
+          isLoaded: true,
+        });
+      }, 0);
     } else {
       // No prediction found, redirect to predict page
       router.push("/predict");
@@ -63,7 +65,7 @@ export default function DashboardPage() {
         <div className="mb-8">
           <Link
             href="/predict"
-            className="text-radon-600 hover:text-radon-700 font-semibold mb-4 inline-block"
+            className="text-primary-600 hover:text-primary-700 font-semibold mb-4 inline-block"
           >
             ← Back to Prediction
           </Link>
@@ -188,7 +190,7 @@ export default function DashboardPage() {
         </div>
 
         {/* Bottom CTA */}
-        <div className="bg-gradient-to-r from-radon-500 to-radon-700 p-8 rounded-lg shadow-lg text-white text-center">
+        <div className="bg-gradient-to-r from-primary-500 to-primary-700 p-8 rounded-lg shadow-lg text-white text-center">
           <h3 className="text-2xl font-bold mb-4">What&apos;s Next?</h3>
           <p className="mb-6">
             This prediction is educational. Get a real radon test kit to measure
@@ -199,13 +201,13 @@ export default function DashboardPage() {
               href="https://takeactiononradon.ca/"
               target="_blank"
               rel="noopener noreferrer"
-              className="bg-white hover:bg-gray-100 text-radon-700 px-8 py-3 rounded-lg font-bold transition-all"
+              className="bg-white hover:bg-gray-100 text-primary-700 px-8 py-3 rounded-lg font-bold transition-all"
             >
               Get a Test Kit →
             </a>
             <Link
               href="/predict"
-              className="bg-radon-800 hover:bg-radon-900 text-white px-8 py-3 rounded-lg font-bold transition-all"
+              className="bg-primary-800 hover:bg-primary-900 text-white px-8 py-3 rounded-lg font-bold transition-all"
             >
               Test Another Home
             </Link>

@@ -192,7 +192,7 @@ export default function HomeInputForm({ onSubmit }: HomeInputFormProps) {
         disabled={!isFormValid}
         className={`w-full py-4 rounded-lg font-bold text-lg transition-all ${
           isFormValid
-            ? "bg-radon-500 hover:bg-radon-600 text-white shadow-lg hover:shadow-xl"
+            ? "bg-primary-500 hover:bg-primary-600 text-white shadow-lg hover:shadow-xl"
             : "bg-gray-300 dark:bg-gray-700 text-gray-500 cursor-not-allowed"
         }`}
       >

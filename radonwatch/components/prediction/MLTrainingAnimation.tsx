@@ -68,7 +68,7 @@ export default function MLTrainingAnimation({
           {/* Progress Bar */}
           <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-4 mb-2">
             <motion.div
-              className="bg-radon-500 h-4 rounded-full"
+              className="bg-primary-500 h-4 rounded-full"
               initial={{ width: 0 }}
               animate={{ width: `${progress}%` }}
               transition={{ duration: 0.3 }}

@@ -23,7 +23,7 @@ export default function LearnPage() {
         <div className="mb-8">
           <Link
             href="/"
-            className="text-radon-600 hover:text-radon-700 font-semibold mb-4 inline-block"
+            className="text-primary-600 hover:text-primary-700 font-semibold mb-4 inline-block"
           >
             ← Back to Home
           </Link>
@@ -81,7 +81,7 @@ export default function LearnPage() {
                   Because radon is invisible and odorless,{" "}
                   <strong>testing is the only way</strong>
                   to know if your home has high radon levels. That`s why
-                  educational tools like RadonVision exist—to help people
+                  educational tools like RadonWatch exist—to help people
                   understand the risk and take action.
                 </p>
               </div>
@@ -153,7 +153,7 @@ export default function LearnPage() {
             content={
               <div className="space-y-4">
                 <p>
-                  RadonVision uses a{" "}
+                  RadonWatch uses a{" "}
                   <strong>machine learning-inspired heuristic model</strong> to
                   predict radon levels. While it`s not a full neural network
                   trained on data (that would take days!), it demonstrates how
@@ -297,7 +297,7 @@ export default function LearnPage() {
 
         {/* Completion CTA */}
         {currentStage > EDUCATION_STAGES.length && (
-          <div className="bg-gradient-to-r from-radon-500 to-radon-700 p-8 rounded-lg shadow-lg text-white text-center">
+          <div className="bg-gradient-to-r from-primary-500 to-primary-700 p-8 rounded-lg shadow-lg text-white text-center">
             <h2 className="text-3xl font-bold mb-4">
               🎉 You`ve Completed All Lessons!
             </h2>
@@ -307,7 +307,7 @@ export default function LearnPage() {
             </p>
             <Link
               href="/predict"
-              className="bg-white hover:bg-gray-100 text-radon-700 px-8 py-4 rounded-lg font-bold text-lg inline-block transition-all"
+              className="bg-white hover:bg-gray-100 text-primary-700 px-8 py-4 rounded-lg font-bold text-lg inline-block transition-all"
             >
               Predict Your Radon Risk 🔬
             </Link>
