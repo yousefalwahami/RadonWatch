@@ -39,23 +39,20 @@ export default function HomeInputForm({
   const isFormValid = Object.values(formData).every((value) => value !== "");
 
   return (
-    <form
-      onSubmit={handleSubmit}
-      className="bg-dark-card border border-subtle p-6 rounded-lg h-full overflow-y-auto"
-    >
-      <h2 className="text-2xl font-bold mb-4 text-text-primary font-serif">
+    <form onSubmit={handleSubmit} className="p-5 h-full overflow-y-auto">
+      <h2 className="text-lg font-bold mb-3 text-text-primary font-serif">
         Enter Your Home Details
       </h2>
 
       {/* Region */}
-      <div className="mb-4">
-        <label className="block text-sm font-semibold mb-1.5 text-gray-700 dark:text-gray-300">
+      <div className="mb-3">
+        <label className="block text-xs font-semibold mb-1 text-gray-400">
           Geographic Region
         </label>
         <select
           value={formData.region}
           onChange={(e) => handleChange("region", e.target.value)}
-          className="w-full p-2.5 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-white text-sm"
+          className="w-full p-2 border border-subtle rounded bg-dark-card-hover text-text-primary text-sm"
           required
         >
           <option value="">Select your region...</option>
@@ -80,14 +77,14 @@ export default function HomeInputForm({
       </div>
 
       {/* Building Age */}
-      <div className="mb-4">
-        <label className="block text-sm font-semibold mb-1.5 text-gray-700 dark:text-gray-300">
+      <div className="mb-3">
+        <label className="block text-xs font-semibold mb-1 text-gray-400">
           Building Age
         </label>
         <select
           value={formData.age}
           onChange={(e) => handleChange("age", e.target.value)}
-          className="w-full p-2.5 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-white text-sm"
+          className="w-full p-2 border border-subtle rounded bg-dark-card-hover text-text-primary text-sm"
           required
         >
           <option value="">Select building age...</option>
@@ -100,14 +97,14 @@ export default function HomeInputForm({
       </div>
 
       {/* Foundation Type */}
-      <div className="mb-4">
-        <label className="block text-sm font-semibold mb-1.5 text-gray-700 dark:text-gray-300">
+      <div className="mb-3">
+        <label className="block text-xs font-semibold mb-1 text-gray-400">
           Foundation Type
         </label>
         <select
           value={formData.foundation}
           onChange={(e) => handleChange("foundation", e.target.value)}
-          className="w-full p-2.5 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-white text-sm"
+          className="w-full p-2 border border-subtle rounded bg-dark-card-hover text-text-primary text-sm"
           required
         >
           <option value="">Select foundation type...</option>
@@ -119,14 +116,14 @@ export default function HomeInputForm({
       </div>
 
       {/* Soil Type */}
-      <div className="mb-4">
-        <label className="block text-sm font-semibold mb-1.5 text-gray-700 dark:text-gray-300">
-          Soil/Bedrock Type (if known)
+      <div className="mb-3">
+        <label className="block text-xs font-semibold mb-1 text-gray-400">
+          Soil/Bedrock Type
         </label>
         <select
           value={formData.soilType}
           onChange={(e) => handleChange("soilType", e.target.value)}
-          className="w-full p-2.5 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-white text-sm"
+          className="w-full p-2 border border-subtle rounded bg-dark-card-hover text-text-primary text-sm"
           required
         >
           <option value="">Select soil type...</option>
@@ -141,14 +138,14 @@ export default function HomeInputForm({
       </div>
 
       {/* Building Size */}
-      <div className="mb-4">
-        <label className="block text-sm font-semibold mb-1.5 text-gray-700 dark:text-gray-300">
+      <div className="mb-3">
+        <label className="block text-xs font-semibold mb-1 text-gray-400">
           Building Size
         </label>
         <select
           value={formData.size}
           onChange={(e) => handleChange("size", e.target.value)}
-          className="w-full p-2.5 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-white text-sm"
+          className="w-full p-2 border border-subtle rounded bg-dark-card-hover text-text-primary text-sm"
           required
         >
           <option value="">Select building size...</option>
@@ -160,14 +157,14 @@ export default function HomeInputForm({
       </div>
 
       {/* Floor Level */}
-      <div className="mb-4">
-        <label className="block text-sm font-semibold mb-1.5 text-gray-700 dark:text-gray-300">
+      <div className="mb-3">
+        <label className="block text-xs font-semibold mb-1 text-gray-400">
           Primary Living Floor
         </label>
         <select
           value={formData.floor}
           onChange={(e) => handleChange("floor", e.target.value)}
-          className="w-full p-2.5 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-white text-sm"
+          className="w-full p-2 border border-subtle rounded bg-dark-card-hover text-text-primary text-sm"
           required
         >
           <option value="">Select floor level...</option>
@@ -178,14 +175,14 @@ export default function HomeInputForm({
       </div>
 
       {/* Ventilation */}
-      <div className="mb-4">
-        <label className="block text-sm font-semibold mb-1.5 text-gray-700 dark:text-gray-300">
+      <div className="mb-3">
+        <label className="block text-xs font-semibold mb-1 text-gray-400">
           Ventilation Quality
         </label>
         <select
           value={formData.ventilation}
           onChange={(e) => handleChange("ventilation", e.target.value)}
-          className="w-full p-2.5 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-white text-sm"
+          className="w-full p-2 border border-subtle rounded bg-dark-card-hover text-text-primary text-sm"
           required
         >
           <option value="">Select ventilation quality...</option>
@@ -199,7 +196,7 @@ export default function HomeInputForm({
       <button
         type="submit"
         disabled={!isFormValid}
-        className={`w-full py-3 rounded-lg font-bold transition-all ${
+        className={`w-full py-2.5 rounded-lg font-bold text-sm transition-all ${
           isFormValid
             ? "bg-accent-gold hover:bg-accent-gold/90 text-dark-bg shadow-lg hover:shadow-glow-gold"
             : "bg-dark-card-hover border border-subtle text-text-secondary cursor-not-allowed"
