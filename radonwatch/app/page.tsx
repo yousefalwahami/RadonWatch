@@ -8,7 +8,7 @@ export default function Home() {
         {/* Header */}
         <header className="flex justify-between items-center mb-20 py-5">
           <div className="font-serif text-3xl font-semibold tracking-wide bg-gradient-to-br from-accent-gold to-accent-blue bg-clip-text text-transparent">
-            RadonVision
+            RadonWatch
           </div>
           <nav className="flex gap-10 items-center">
             <Link
@@ -143,7 +143,7 @@ export default function Home() {
         {/* Footer */}
         <footer className="text-center py-10 text-text-secondary text-xs border-t border-subtle mt-20">
           <p>
-            RadonVision © 2026 · Built for health education · Data from Health
+            RadonWatch © 2026 · Built for health education · Data from Health
             Canada
           </p>
         </footer>
