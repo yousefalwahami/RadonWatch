@@ -219,7 +219,7 @@ function Window({
         <meshStandardMaterial color="#f5f0e8" />
       </mesh>
       {/* Glass */}
-      <mesh position={[0, 0, 0.01]}>
+      <mesh position={[0, 0, 0.02]}>
         <boxGeometry args={[width, height, 0.04]} />
         <meshStandardMaterial
           color="#a8d8ea"
@@ -330,23 +330,23 @@ function MainHouse() {
       </group>
 
       {/* Front windows */}
-      <Window position={[-0.8, 1.8, -wallD / 2 - 0.04]} />
-      <Window position={[0.8, 1.8, -wallD / 2 - 0.04]} />
+      <Window position={[-0.8, 1.8, -wallD / 2 - 0.1]} rotation={[0, Math.PI, 0]} />
+      <Window position={[0.8, 1.8, -wallD / 2 - 0.1]} rotation={[0, Math.PI, 0]} />
 
       {/* Front door */}
-      <Door position={[0, 1.4, -wallD / 2 - 0.04]} />
+      <Door position={[0, 1.4, -wallD / 2 - 0.1]} />
 
       {/* Side windows */}
       <Window
-        position={[wallW / 2 + 0.04, 1.8, -0.5]}
+        position={[wallW / 2 + 0.1, 1.8, -0.5]}
         rotation={[0, Math.PI / 2, 0]}
       />
       <Window
-        position={[wallW / 2 + 0.04, 1.8, 0.5]}
+        position={[wallW / 2 + 0.1, 1.8, 0.5]}
         rotation={[0, Math.PI / 2, 0]}
       />
       <Window
-        position={[-wallW / 2 - 0.04, 1.8, 0]}
+        position={[-wallW / 2 - 0.1, 1.8, 0]}
         rotation={[0, -Math.PI / 2, 0]}
       />
 
@@ -354,12 +354,6 @@ function MainHouse() {
       <mesh position={[0.8, 0.95 + wallH + roofH * 0.6, 0.4]}>
         <boxGeometry args={[0.3, 0.8, 0.3]} />
         <meshStandardMaterial color="#7a3b2e" />
-      </mesh>
-
-      {/* Front step */}
-      <mesh position={[0, 0.98, -wallD / 2 - 0.3]}>
-        <boxGeometry args={[0.9, 0.08, 0.4]} />
-        <meshStandardMaterial color="#999" />
       </mesh>
     </group>
   );
@@ -417,28 +411,30 @@ function NeighborHouse({
 
       {/* Front windows */}
       <Window
-        position={[-0.65, wallH * 0.55, -wallD / 2 - 0.04]}
+        position={[-0.65, wallH * 0.55, -wallD / 2 - 0.08]}
         width={0.4}
         height={0.5}
+        rotation={[0, Math.PI, 0]}
       />
       <Window
-        position={[0.65, wallH * 0.55, -wallD / 2 - 0.04]}
+        position={[0.65, wallH * 0.55, -wallD / 2 - 0.08]}
         width={0.4}
         height={0.5}
+        rotation={[0, Math.PI, 0]}
       />
 
       {/* Front door */}
-      <Door position={[0, wallH * 0.32, -wallD / 2 - 0.04]} color="#3e2612" />
+      <Door position={[0, wallH * 0.32, -wallD / 2 - 0.08]} color="#3e2612" />
 
       {/* Side windows */}
       <Window
-        position={[wallW / 2 + 0.04, wallH * 0.55, 0]}
+        position={[wallW / 2 + 0.08, wallH * 0.55, 0]}
         rotation={[0, Math.PI / 2, 0]}
         width={0.35}
         height={0.45}
       />
       <Window
-        position={[-wallW / 2 - 0.04, wallH * 0.55, 0]}
+        position={[-wallW / 2 - 0.08, wallH * 0.55, 0]}
         rotation={[0, -Math.PI / 2, 0]}
         width={0.35}
         height={0.45}
@@ -467,7 +463,7 @@ function NeighborHouse({
             />
           </group>
           {/* Garage door */}
-          <mesh position={[0, 0.55, -wallD * 0.4 - 0.04]}>
+          <mesh position={[0, 0.55, -wallD * 0.4 - 0.08]}>
             <boxGeometry args={[1.4, 1.0, 0.06]} />
             <meshStandardMaterial color="#e8e0d0" />
           </mesh>
