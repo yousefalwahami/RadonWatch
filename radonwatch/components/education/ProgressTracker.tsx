@@ -16,20 +16,20 @@ export default function ProgressTracker({
   const progress = (currentStage / totalStages) * 100;
 
   return (
-    <div className="bg-white dark:bg-gray-900 p-6 rounded-lg shadow-lg mb-8">
-      <h3 className="text-lg font-semibold mb-4 text-gray-900 dark:text-white">
+    <div className="bg-dark-card border border-subtle p-6 rounded-lg mb-8">
+      <h3 className="text-lg font-semibold mb-4 text-text-primary font-serif">
         Learning Progress
       </h3>
 
       {/* Progress bar */}
       <div className="mb-6">
-        <div className="flex justify-between text-sm text-gray-600 dark:text-gray-400 mb-2">
+        <div className="flex justify-between text-sm text-text-secondary mb-2">
           <span>
             Stage {currentStage} of {totalStages}
           </span>
           <span>{Math.round(progress)}%</span>
         </div>
-        <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-3">
+        <div className="w-full bg-dark-card-hover border border-subtle rounded-full h-3">
           <motion.div
             className="bg-primary-500 h-3 rounded-full"
             initial={{ width: 0 }}
@@ -54,7 +54,7 @@ export default function ProgressTracker({
                   ? "bg-green-100 dark:bg-green-900 text-green-700 dark:text-green-300"
                   : isCurrent
                     ? "bg-primary-100 dark:bg-primary-900 text-primary-700 dark:text-primary-300"
-                    : "bg-gray-100 dark:bg-gray-800 text-gray-400"
+                    : "bg-dark-card-hover border border-subtle text-text-secondary"
               }`}
             >
               <div className="text-2xl mb-1">
@@ -76,7 +76,7 @@ export default function ProgressTracker({
       {/* Features unlocked */}
       {currentStage > 0 && (
         <div className="mt-6 pt-6 border-t border-gray-200 dark:border-gray-700">
-          <h4 className="text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">
+          <h4 className="text-sm font-semibold text-text-primary mb-2 font-serif">
             Features Unlocked:
           </h4>
           <div className="flex flex-wrap gap-2">

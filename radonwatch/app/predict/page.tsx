@@ -56,20 +56,20 @@ export default function PredictPage() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-gray-950 py-12">
+    <div className="min-h-screen bg-dark-bg py-12">
       <div className="container mx-auto px-4 max-w-6xl">
         {/* Header */}
         <div className="mb-8">
           <Link
             href="/"
-            className="text-primary-600 hover:text-primary-700 font-semibold mb-4 inline-block"
+            className="text-accent-gold hover:text-text-primary font-semibold mb-4 inline-block transition-colors"
           >
             ← Back to Home
           </Link>
-          <h1 className="text-4xl font-bold text-gray-900 dark:text-white mb-2">
+          <h1 className="text-4xl font-bold text-text-primary mb-2 font-serif">
             Radon Risk Prediction
           </h1>
-          <p className="text-gray-600 dark:text-gray-400">
+          <p className="text-text-secondary">
             Enter your home details to get an AI-powered radon risk assessment
           </p>
         </div>
@@ -95,10 +95,10 @@ export default function PredictPage() {
 
             {/* 3D Visualization */}
             <div>
-              <h2 className="text-2xl font-bold mb-4 text-gray-900 dark:text-white">
+              <h2 className="text-2xl font-bold mb-4 text-text-primary font-serif">
                 3D Radon Visualization
               </h2>
-              <p className="text-gray-600 dark:text-gray-400 mb-4">
+              <p className="text-text-secondary mb-4">
                 See how radon flows through your home. Try adjusting the
                 controls!
               </p>
@@ -112,7 +112,7 @@ export default function PredictPage() {
                   setPrediction(null);
                   setHomeData(null);
                 }}
-                className="bg-gray-600 hover:bg-gray-700 text-white px-8 py-4 rounded-lg font-bold text-lg transition-all"
+                className="bg-dark-card-hover hover:bg-accent-gold hover:text-dark-bg border border-subtle text-text-primary px-8 py-4 rounded-lg font-bold text-lg transition-all"
               >
                 ← Test Another Home
               </button>

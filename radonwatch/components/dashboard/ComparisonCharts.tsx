@@ -116,7 +116,7 @@ export default function ComparisonCharts({
             <Tooltip />
           </PieChart>
         </ResponsiveContainer>
-        <div className="mt-4 text-center text-sm text-gray-600 dark:text-gray-400">
+        <div className="mt-4 text-center text-sm text-text-secondary">
           Based on Health Canada Cross-Canada Survey
         </div>
       </div>

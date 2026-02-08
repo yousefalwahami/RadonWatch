@@ -56,13 +56,13 @@ export default function PredictionResultDisplay({
       <div className={`p-8 rounded-lg border-4 ${getRiskBgColor()} mb-6`}>
         <div className="text-center">
           <div className="text-6xl mb-4">{getRiskIcon()}</div>
-          <h2 className="text-4xl font-bold mb-2 text-gray-900 dark:text-white">
+          <h2 className="text-4xl font-bold mb-2 text-text-primary font-serif">
             {result.radonLevel} Bq/m³
           </h2>
           <p className={`text-2xl font-semibold ${getRiskTextColor()}`}>
             {result.riskLabel}
           </p>
-          <p className="text-sm text-gray-600 dark:text-gray-400 mt-2">
+          <p className="text-sm text-text-secondary mt-2">
             Confidence Interval: {result.confidenceInterval.lower} -{" "}
             {result.confidenceInterval.upper} Bq/m³
           </p>
@@ -91,7 +91,7 @@ export default function PredictionResultDisplay({
               style={{ left: `${(HEALTH_CANADA_THRESHOLD / 400) * 100}%` }}
             />
           </div>
-          <div className="flex justify-between mt-1 text-xs text-gray-600 dark:text-gray-400">
+          <div className="flex justify-between mt-1 text-xs text-text-secondary">
             <span>0</span>
             <span>400+</span>
           </div>
@@ -99,8 +99,8 @@ export default function PredictionResultDisplay({
       </div>
 
       {/* Comparison to Regional Average */}
-      <div className="bg-white dark:bg-gray-900 p-6 rounded-lg shadow-lg mb-6">
-        <h3 className="text-xl font-bold mb-4 text-gray-900 dark:text-white">
+      <div className="bg-dark-card border border-subtle p-6 rounded-lg mb-6">
+        <h3 className="text-xl font-bold mb-4 text-text-primary font-serif">
           Regional Comparison
         </h3>
         <div className="grid grid-cols-2 gap-4">
@@ -131,11 +131,11 @@ export default function PredictionResultDisplay({
       </div>
 
       {/* Factor Breakdown */}
-      <div className="bg-white dark:bg-gray-900 p-6 rounded-lg shadow-lg">
-        <h3 className="text-xl font-bold mb-4 text-gray-900 dark:text-white">
+      <div className="bg-dark-card border border-subtle p-6 rounded-lg">
+        <h3 className="text-xl font-bold mb-4 text-text-primary font-serif">
           Risk Factor Breakdown
         </h3>
-        <p className="text-sm text-gray-600 dark:text-gray-400 mb-4">
+        <p className="text-sm text-text-secondary mb-4">
           These factors contributed to your radon prediction:
         </p>
         <div className="space-y-3">

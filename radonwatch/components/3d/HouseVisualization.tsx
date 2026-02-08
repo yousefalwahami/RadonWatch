@@ -189,7 +189,7 @@ export default function HouseVisualization({
   const [ventilationActive, setVentilationActive] = useState(false);
 
   return (
-    <div className="bg-gray-900 rounded-lg overflow-hidden">
+    <div className="bg-dark-card border border-subtle rounded-lg overflow-hidden">
       <div className="h-96 md:h-[500px]">
         <Canvas camera={{ position: [5, 2, 5], fov: 50 }}>
           <ambientLight intensity={0.5} />
@@ -208,7 +208,7 @@ export default function HouseVisualization({
       </div>
 
       {/* Controls */}
-      <div className="bg-gray-800 p-4 space-y-4">
+      <div className="bg-dark-card-hover border-t border-subtle p-4 space-y-4">
         <div>
           <div className="flex justify-between items-center mb-2">
             <label className="text-white text-sm font-semibold">
@@ -227,7 +227,7 @@ export default function HouseVisualization({
             onChange={(e) => setAirPressure(parseFloat(e.target.value))}
             className="w-full"
           />
-          <p className="text-xs text-gray-400 mt-1">
+          <p className="text-xs text-text-secondary mt-1">
             Higher pressure = faster radon entry
           </p>
         </div>
@@ -241,7 +241,7 @@ export default function HouseVisualization({
             className={`px-4 py-2 rounded-lg font-semibold transition-colors ${
               ventilationActive
                 ? "bg-green-600 hover:bg-green-700 text-white"
-                : "bg-gray-600 hover:bg-gray-700 text-gray-300"
+                : "bg-dark-card-hover hover:bg-dark-card border border-subtle text-text-secondary"
             }`}
           >
             {ventilationActive ? "✓ Active" : "○ Inactive"}
@@ -249,7 +249,7 @@ export default function HouseVisualization({
         </div>
 
         <div className="pt-3 border-t border-gray-700">
-          <div className="flex items-center gap-2 text-xs text-gray-400">
+          <div className="flex items-center gap-2 text-xs text-text-secondary">
             <div className="flex items-center gap-1">
               <div className="w-3 h-3 rounded-full bg-green-500"></div>
               <span>Low</span>

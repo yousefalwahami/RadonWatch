@@ -48,9 +48,9 @@ export default function DashboardPage() {
 
   if (!state.prediction || !state.isLoaded) {
     return (
-      <div className="min-h-screen bg-gray-50 dark:bg-gray-950 flex items-center justify-center">
+      <div className="min-h-screen bg-dark-bg flex items-center justify-center">
         <div className="text-center">
-          <p className="text-gray-600 dark:text-gray-400 mb-4">
+          <p className="text-text-secondary mb-4">
             Loading your results...
           </p>
         </div>
@@ -59,20 +59,20 @@ export default function DashboardPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-gray-950 py-12">
+    <div className="min-h-screen bg-dark-bg py-12">
       <div className="container mx-auto px-4 max-w-7xl">
         {/* Header */}
         <div className="mb-8">
           <Link
             href="/predict"
-            className="text-primary-600 hover:text-primary-700 font-semibold mb-4 inline-block"
+            className="text-accent-gold hover:text-text-primary font-semibold mb-4 inline-block transition-colors"
           >
             ← Back to Prediction
           </Link>
-          <h1 className="text-4xl font-bold text-gray-900 dark:text-white mb-2">
+          <h1 className="text-4xl font-bold text-text-primary mb-2 font-serif">
             Your Radon Risk Dashboard
           </h1>
-          <p className="text-gray-600 dark:text-gray-400">
+          <p className="text-text-secondary">
             Comprehensive analysis and recommendations for your home
           </p>
         </div>
@@ -86,16 +86,16 @@ export default function DashboardPage() {
 
           {/* Right Column - Quick Stats */}
           <div className="space-y-6">
-            <div className="bg-white dark:bg-gray-900 p-6 rounded-lg shadow-lg">
-              <h3 className="text-xl font-bold mb-4 text-gray-900 dark:text-white">
+            <div className="bg-dark-card border border-subtle p-6 rounded-lg">
+              <h3 className="text-xl font-bold mb-4 text-text-primary font-serif">
                 Your Results
               </h3>
               <div className="space-y-3">
                 <div className="flex justify-between">
-                  <span className="text-gray-600 dark:text-gray-400">
+                  <span className="text-text-secondary">
                     Radon Level:
                   </span>
-                  <span className="font-bold text-gray-900 dark:text-white">
+                  <span className="font-bold text-text-primary">
                     {state.prediction.radonLevel} Bq/m³
                   </span>
                 </div>
@@ -116,10 +116,10 @@ export default function DashboardPage() {
                   </span>
                 </div>
                 <div className="flex justify-between">
-                  <span className="text-gray-600 dark:text-gray-400">
+                  <span className="text-text-secondary">
                     Regional Avg:
                   </span>
-                  <span className="font-bold text-gray-900 dark:text-white">
+                  <span className="font-bold text-text-primary">
                     {state.regionalAverage} Bq/m³
                   </span>
                 </div>
@@ -127,40 +127,40 @@ export default function DashboardPage() {
             </div>
 
             {state.homeData && (
-              <div className="bg-white dark:bg-gray-900 p-6 rounded-lg shadow-lg">
-                <h3 className="text-xl font-bold mb-4 text-gray-900 dark:text-white">
+              <div className="bg-dark-card border border-subtle p-6 rounded-lg">
+                <h3 className="text-xl font-bold mb-4 text-text-primary font-serif">
                   Your Home
                 </h3>
                 <div className="space-y-2 text-sm">
                   <div>
-                    <span className="text-gray-600 dark:text-gray-400">
+                    <span className="text-text-secondary">
                       Region:
                     </span>{" "}
-                    <span className="text-gray-900 dark:text-white">
+                    <span className="text-text-primary">
                       {state.homeData.region.replace(/_/g, " ")}
                     </span>
                   </div>
                   <div>
-                    <span className="text-gray-600 dark:text-gray-400">
+                    <span className="text-text-secondary">
                       Age:
                     </span>{" "}
-                    <span className="text-gray-900 dark:text-white">
+                    <span className="text-text-primary">
                       {state.homeData.age} years
                     </span>
                   </div>
                   <div>
-                    <span className="text-gray-600 dark:text-gray-400">
+                    <span className="text-text-secondary">
                       Foundation:
                     </span>{" "}
-                    <span className="text-gray-900 dark:text-white capitalize">
+                    <span className="text-text-primary capitalize">
                       {state.homeData.foundation}
                     </span>
                   </div>
                   <div>
-                    <span className="text-gray-600 dark:text-gray-400">
+                    <span className="text-text-secondary">
                       Floor:
                     </span>{" "}
-                    <span className="text-gray-900 dark:text-white capitalize">
+                    <span className="text-text-primary capitalize">
                       {state.homeData.floor}
                     </span>
                   </div>
@@ -172,7 +172,7 @@ export default function DashboardPage() {
 
         {/* Comparison Charts */}
         <div className="mb-8">
-          <h2 className="text-3xl font-bold mb-6 text-gray-900 dark:text-white">
+          <h2 className="text-3xl font-bold mb-6 text-text-primary font-serif">
             Data Analysis & Comparisons
           </h2>
           <ComparisonCharts
@@ -183,7 +183,7 @@ export default function DashboardPage() {
 
         {/* Canada Map */}
         <div className="mb-8">
-          <h2 className="text-3xl font-bold mb-6 text-gray-900 dark:text-white">
+          <h2 className="text-3xl font-bold mb-6 text-text-primary font-serif">
             Canada-Wide Radon Data
           </h2>
           <CanadaMap />
@@ -201,7 +201,7 @@ export default function DashboardPage() {
               href="https://takeactiononradon.ca/"
               target="_blank"
               rel="noopener noreferrer"
-              className="bg-white hover:bg-gray-100 text-primary-700 px-8 py-3 rounded-lg font-bold transition-all"
+              className="bg-accent-gold hover:bg-accent-gold/90 text-dark-bg px-8 py-3 rounded-lg font-bold transition-all"
             >
               Get a Test Kit →
             </a>

@@ -51,22 +51,22 @@ export default function MLTrainingAnimation({
       <motion.div
         initial={{ scale: 0.9, opacity: 0 }}
         animate={{ scale: 1, opacity: 1 }}
-        className="bg-white dark:bg-gray-900 p-8 rounded-lg shadow-2xl max-w-2xl w-full"
+        className="bg-dark-card border border-subtle p-8 rounded-lg shadow-2xl max-w-2xl w-full"
       >
-        <h2 className="text-3xl font-bold mb-6 text-center text-gray-900 dark:text-white">
+        <h2 className="text-3xl font-bold mb-6 text-center text-text-primary font-serif">
           🧠 Training Neural Network
         </h2>
 
         {/* Current Phase */}
         <div className="mb-6">
-          <p className="text-lg text-gray-700 dark:text-gray-300 mb-4 text-center">
+          <p className="text-lg text-text-primary mb-4 text-center">
             {currentPhase < ML_TRAINING_PHASES.length
               ? ML_TRAINING_PHASES[currentPhase].phase
               : "Analysis Complete!"}
           </p>
 
           {/* Progress Bar */}
-          <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-4 mb-2">
+          <div className="w-full bg-dark-card-hover border border-subtle rounded-full h-4 mb-2">
             <motion.div
               className="bg-primary-500 h-4 rounded-full"
               initial={{ width: 0 }}
@@ -74,7 +74,7 @@ export default function MLTrainingAnimation({
               transition={{ duration: 0.3 }}
             />
           </div>
-          <div className="flex justify-between text-sm text-gray-600 dark:text-gray-400">
+          <div className="flex justify-between text-sm text-text-secondary">
             <span>Progress</span>
             <span>{progress}%</span>
           </div>
@@ -86,7 +86,7 @@ export default function MLTrainingAnimation({
             <div className="text-sm text-gray-600 dark:text-gray-400 mb-1">
               Epoch
             </div>
-            <div className="text-2xl font-bold text-gray-900 dark:text-white">
+            <div className="text-2xl font-bold text-text-primary">
               {metrics.epoch}/6
             </div>
           </div>

@@ -27,14 +27,14 @@ export default function Lesson({
 
   if (!isUnlocked) {
     return (
-      <div className="bg-gray-100 dark:bg-gray-800 p-6 rounded-lg opacity-50">
-        <div className="flex items-center gap-3 mb-4">
-          <div className="w-10 h-10 bg-gray-300 dark:bg-gray-700 rounded-full flex items-center justify-center">
-            <span className="text-gray-500 font-bold">{lessonNumber}</span>
+      <div className="bg-dark-card/50 border border-subtle p-6 rounded-lg opacity-50">
+        <div className="flex items-center gap-4 mb-4">
+          <div className="w-10 h-10 bg-text-secondary/20 border border-subtle rounded-full flex items-center justify-center">
+            <span className="text-text-secondary font-bold">{lessonNumber}</span>
           </div>
-          <h2 className="text-2xl font-bold text-gray-400">🔒 {title}</h2>
+          <h2 className="text-2xl font-bold text-text-secondary font-serif">🔒 {title}</h2>
         </div>
-        <p className="text-gray-500">Complete the previous lesson to unlock</p>
+        <p className="text-text-secondary">Complete the previous lesson to unlock</p>
       </div>
     );
   }

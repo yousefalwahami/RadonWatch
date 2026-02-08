@@ -57,7 +57,7 @@ export default function RiskDashboard({ result }: RiskDashboardProps) {
         <h3 className="text-2xl font-bold mb-4 text-gray-900 dark:text-white">
           {healthImpact.title}
         </h3>
-        <p className="text-gray-700 dark:text-gray-300 mb-4">
+        <p className="text-text-primary mb-4">
           {healthImpact.description}
         </p>
         <div className="bg-primary-100 dark:bg-primary-900 border-l-4 border-primary-500 p-4 rounded">

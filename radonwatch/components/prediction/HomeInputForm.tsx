@@ -32,9 +32,9 @@ export default function HomeInputForm({ onSubmit }: HomeInputFormProps) {
   return (
     <form
       onSubmit={handleSubmit}
-      className="bg-white dark:bg-gray-900 p-8 rounded-lg shadow-lg max-w-2xl mx-auto"
+      className="bg-dark-card border border-subtle p-8 rounded-lg max-w-2xl mx-auto"
     >
-      <h2 className="text-3xl font-bold mb-6 text-gray-900 dark:text-white">
+      <h2 className="text-3xl font-bold mb-6 text-text-primary font-serif">
         Enter Your Home Details
       </h2>
 
@@ -192,8 +192,8 @@ export default function HomeInputForm({ onSubmit }: HomeInputFormProps) {
         disabled={!isFormValid}
         className={`w-full py-4 rounded-lg font-bold text-lg transition-all ${
           isFormValid
-            ? "bg-primary-500 hover:bg-primary-600 text-white shadow-lg hover:shadow-xl"
-            : "bg-gray-300 dark:bg-gray-700 text-gray-500 cursor-not-allowed"
+            ? "bg-accent-gold hover:bg-accent-gold/90 text-dark-bg shadow-lg hover:shadow-glow-gold"
+            : "bg-dark-card-hover border border-subtle text-text-secondary cursor-not-allowed"
         }`}
       >
         Analyze My Radon Risk 🔬

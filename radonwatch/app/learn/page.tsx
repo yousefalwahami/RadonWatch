@@ -17,20 +17,20 @@ export default function LearnPage() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-gray-950 py-12">
+    <div className="min-h-screen bg-dark-bg py-12">
       <div className="container mx-auto px-4 max-w-5xl">
         {/* Header */}
         <div className="mb-8">
           <Link
             href="/"
-            className="text-primary-600 hover:text-primary-700 font-semibold mb-4 inline-block"
+            className="text-accent-gold hover:text-text-primary font-semibold mb-4 inline-block transition-colors"
           >
             ← Back to Home
           </Link>
-          <h1 className="text-4xl font-bold text-gray-900 dark:text-white mb-2">
+          <h1 className="text-4xl font-bold text-text-primary mb-2 font-serif">
             Learn About Radon
           </h1>
-          <p className="text-gray-600 dark:text-gray-400">
+          <p className="text-text-secondary">
             Interactive lessons to understand radon and ML prediction
           </p>
         </div>
@@ -160,8 +160,8 @@ export default function LearnPage() {
                   ML systems work by analyzing multiple risk factors.
                 </p>
 
-                <div className="bg-gray-100 dark:bg-gray-800 p-4 rounded">
-                  <h4 className="font-bold mb-3 text-gray-900 dark:text-white">
+                <div className="bg-dark-card-hover border border-subtle p-4 rounded">
+                  <h4 className="font-bold mb-3 text-text-primary font-serif">
                     7 Risk Factors Analyzed:
                   </h4>
                   <ol className="space-y-2 text-sm">
@@ -235,7 +235,7 @@ export default function LearnPage() {
                   that can reduce radon by 80-99%.
                 </p>
 
-                <h4 className="font-bold text-lg text-gray-900 dark:text-white mt-6">
+                <h4 className="font-bold text-lg text-text-primary mt-6 font-serif">
                   Most Effective: Sub-Slab Depressurization
                 </h4>
                 <p>
@@ -250,7 +250,7 @@ export default function LearnPage() {
                   <li>Maintenance: Fan runs 24/7, minimal upkeep</li>
                 </ul>
 
-                <h4 className="font-bold text-lg text-gray-900 dark:text-white mt-6">
+                <h4 className="font-bold text-lg text-text-primary mt-6 font-serif">
                   Other Strategies
                 </h4>
                 <ul className="list-disc pl-6 space-y-2">
@@ -307,7 +307,7 @@ export default function LearnPage() {
             </p>
             <Link
               href="/predict"
-              className="bg-white hover:bg-gray-100 text-primary-700 px-8 py-4 rounded-lg font-bold text-lg inline-block transition-all"
+              className="bg-accent-gold hover:bg-accent-gold/90 text-dark-bg px-8 py-4 rounded-lg font-bold text-lg inline-block transition-all"
             >
               Predict Your Radon Risk 🔬
             </Link>

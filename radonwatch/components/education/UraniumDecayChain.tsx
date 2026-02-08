@@ -51,7 +51,7 @@ export default function UraniumDecayChain() {
 
   return (
     <div className="my-8">
-      <h3 className="text-xl font-bold mb-4 text-center text-gray-900 dark:text-white">
+      <h3 className="text-xl font-bold mb-4 text-center text-text-primary font-serif">
         Uranium Decay Chain → Radon
       </h3>
       <div className="flex flex-col md:flex-row items-center justify-center gap-4 flex-wrap">
@@ -77,12 +77,12 @@ export default function UraniumDecayChain() {
               </div>
             </div>
             {index < decaySteps.length - 1 && (
-              <div className="text-3xl text-gray-400">→</div>
+              <div className="text-3xl text-text-secondary/50">→</div>
             )}
           </motion.div>
         ))}
       </div>
-      <p className="text-center mt-6 text-gray-600 dark:text-gray-400 text-sm">
+      <p className="text-center mt-6 text-text-secondary text-sm">
         primary-222 is a radioactive gas that escapes from soil and enters homes
         through cracks and openings.
       </p>
